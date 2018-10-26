@@ -1,0 +1,253 @@
+<section>
+<header>
+
+    <!-- Sidebar navigation -->
+    <div id="slide-out" *ngIf="slideout" class="side-nav sn-bg-4 mdb-sidenav fixed" style="transform: translateX(0%);">
+        <ul class="custom-scrollbar list-unstyled ps ps--theme_default ps--active-y" style="max-height:100vh;" data-ps-id="1b28417e-6933-13ea-cb77-132f40160ccf">
+            <!-- Logo -->
+            <li class="logo-sn d-block waves-effect">
+                <div class="text-center">
+                    <a class="pl-0" href="https://www.agility.com/en"><img id="MDB-logo" src="assets/logo.png" alt="AES Logo"></a>
+                </div>
+            </li>
+            <!--/. Logo -->
+            <!--Search Form-->
+            <li>
+                <form class="search-form" onkeypress="return event.keyCode != 13;" role="search" method="GET" autocomplete="off">
+                    <div class="form-group md-form mt-0 d-block waves-light waves-effect waves-light">
+                        <input type="text" class="form-control pb-1 mb-0" name="mdw_serach" placeholder="Search" id="angular_search" style="height: 1.8rem;">
+                        <label for="angular_search" class="sr-only active">Search</label>
+                    </div>
+                    <div class="dropdown-wrapper"></div>
+                </form>
+            </li>
+            <!--/.Search Form-->
+            <!-- Side navigation links -->
+            <li>
+                <ul id="side-menu" class="collapsible collapsible-accordion">
+
+                    <li id="menu-item-61789" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-61789 active">
+                        <a class="collapsible-header waves-effect arrow-r active"><i class="material-icons">menu</i> Navigation<i class="material-icons" style="float:right;">arrow_drop_down</i></a>
+                        <div class="collapsible-body" style="display: block;">
+                            <ul class="sub-menu">
+                                <li id="menu-item-79346" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-79346" *ngFor="let item of items" (click)="onSelect(item.path,item.text,item.IsAdd,item.IsEdit,item.IsView,item.IsDelete)">
+                                    <a class="collapsible-header waves-effect" id="link-menu-item-79346" [routerLink]="item.path" (click)="onSelect(item.path,item.text,item.IsAdd,item.IsEdit,item.IsView,item.IsDelete)" [hidden]="!item.IsScreenAssigned">{{item.text}}</a>
+                                </li>
+                                <li id="menu-item-79346" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-79346">
+                                <a class="collapsible-header waves-effect" id="link-menu-item-79346" (click)="LockScreen()">Lock</a>
+                               </li>
+                               <li id="menu-item-79346" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-79346">
+
+                                <a class="collapsible-header waves-effect" href="http://localhost:4200/dashboard">Windows Login(Usha)</a>
+                                </li>
+                                <li id="menu-item-79346" class="menu-item menu-item-type-post_type menu-item-object-page  menu-item-79346">
+                                <a class="collapsible-header waves-effect" href="http://10.138.77.173:8045/">Rahul Application</a>
+                            </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- /. Side navigation links -->
+          
+        </ul>
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!--/. Sidebar navigation -->
+    <!--/.SideNav-->
+    <!-- Navbar-->
+    <nav class="navbar fixed-top navbar-expand-md navbar-light white double-nav scrolling-navbar">
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+            <a (click)="slideout=true" class="button-collapse"><i class="material-icons">menu</i><span class="sr-only" aria-hidden="true">Toggle side navigation</span></a>
+        </div>
+        <!-- Navbar links-->
+        <!--Navigation icons-->
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+            <li class="nav-item waves-light nav-link" mdbWavesEffect (click)="Logout()">
+             
+            <a class="nav-link"> <span> <i class="Tiny material-icons">settings_power</i>  {{LoginName}}</span></a>                   
+         </li>
+        </ul>
+    </nav>
+    <!-- /.Navbar-->
+</header>
+</section>
+<div class="switch-version d-none d-md-block">
+    <a id="switch-mdb-jquery" href="#/material-design-for-bootstrap"><span class="switch-to mdb-jquery active"></span></a>
+    <a id="switch-mdb-angular" href="#/angular"><span class="switch-to mdb-angular"></span></a>
+    <a id="switch-mdb-react" href="#/react"><span class="switch-to mdb-react"></span></a>
+    <a id="switch-mdb-vue" href="#/vue"><span class="switch-to mdb-vue"></span></a>
+  
+  </div>
+<section>
+
+    <div class="fixed-action-btn" style="bottom: 88px; right: 0px;">
+      <a class="btn-floating red waves-effect waves-light" style="border-radius: 10em;">
+        <!--<i class="fa fa-pencil"></i>-->
+        <i class="material-icons">create</i>
+      </a>
+
+        <ul class="list-unstyled">
+            <li><a class="btn-floating red waves-effect waves-light"><i class="material-icons">shopping_cart</i></a></li>
+            <li><a class="btn-floating yellow darken-1 waves-effect waves-light"><i class="material-icons">mail</i></a></li>
+            <li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">person</i></a></li>
+            <li><a class="btn-floating blue waves-effect waves-light"><i class="material-icons">star</i></a></li>
+        </ul>
+    </div>
+
+</section>
+<!--Main Layout-->
+<section>
+<main class="py-5">
+ 
+    <div class="container" style="margin-top:18px" *ngIf="BindHeader !='Login'">
+        <mdb-card *ngIf="BindHeader =='Home'">
+          <!-- <div class="sample1">
+              <div class="sample"><strong>{{'welcome to agility' | titlecase}}</strong></div>
+          </div> -->
+           
+            <mdb-card-header class="breadcrumb deep-orange lighten-1 white-text">
+                <li class="breadcrumb-item">
+                   <i class="material-icons">star</i>
+                    <a class="white-text" routerLink="">Home</a>
+                </li>
+
+                <li class="breadcrumb-item active">
+                   <i class="material-icons">star</i>
+                    {{BindHeader}}
+
+                </li>
+
+            </mdb-card-header>
+            <mdb-card-body>
+
+                <section id="hero" class="page-hero">
+                    <div id="hero-image" style="background: url(https://www.agility.com/wp-content/uploads/2017/09/hero-image-final.jpg) no-repeat;height: 577px;background-size: contain;background-position: center;"></div>
+                    <div class="container">
+                        <div class="hero-title">
+                            <h1>About Us</h1>
+                        </div>
+
+                    </div>
+
+                </section>
+                <section class="statistics-numbers">
+                    <div class="container">
+                        <div class="statistics-numbers-wrapp">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 numbers-column">
+                                    <div class="numbers"><span class="counter">4.6</span> <span>billion</span> <span>+</span></div>
+                                    <div class="numbers_title">revenue in US dollars</div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 numbers-column">
+                                    <div class="numbers"><span class="counter">22,000</span></div>
+                                    <div class="numbers_title">employees at Agility</div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 numbers-column">
+                                    <div class="numbers"><span class="counter">100</span></div>
+                                    <div class="numbers_title">countries in operation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="about-presentation">
+                    <div class="container">
+                        <div class="presentation-wrapp">
+                            <div class="presentation-item">
+                                <div class="images">
+                                    <div class="image1">
+                                        <img src="https://www.agility.com/wp-content/uploads/2017/08/RS3501_LEP-Horse-Carriage.jpg"
+                                         alt="Our History" style="height: 677px;">
+                                    </div>
+                                </div>
+                                <div class="presentation-container">
+                                    <div class="text-content">
+                                        <h2>Our History</h2>
+                                        <div class="presentation">
+                                            <p>Agility’s story parallels the rise of emerging markets in the global economy. The company got its start as a local warehousing 
+                                                provider in Kuwait and grew to become the largest logistics company in the Middle East. It acquired more than 40 logistics brands around the world, some in business since the mid-1800s. Agility today is one of the world’s largest integrated logistics providers and the largest private owner and developer of industrial real estate in the Middle East and North Africa.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="presentation-item two-images">
+                                <div class="images">
+                                    <div class="image1">
+                                        <img src="https://www.agility.com/wp-content/uploads/2018/02/our-bussines-mob2.png"
+                                         alt="Our Lines of Business"  style="height: 624px;">
+                                    </div>
+                                    <div class="image2">
+                                        <img src="https://www.agility.com/wp-content/uploads/2017/09/Our-Business-final.jpg"
+                                         alt="Our Lines of Business" style="height: 324px;">
+                                    </div>
+                                </div>
+                                <div class="presentation-container">
+                                    <div class="text-content">
+                                        <h2>Our Lines of Business</h2>
+                                        <div class="presentation">
+                                            <p><strong>Facilitate Trade</strong>: Agility Global Integrated Logistics works with companies to move, manage and distribute the goods that underpin global commerce. Agility GIL offers air, ocean and road freight forwarding, warehousing, distribution, and specialized services in project logistics, fairs and events, and chemicals. Agility’s solutions are powered by industry-leading technology.</p>
+                                            <p><strong>Create Access in Emerging Markets</strong>: Agility has a diverse portfolio of businesses that build trade infrastructure in emerging markets. Agility is developing logistics and industrial parks across the Middle East and Africa. Trading under their own brand names, Agility’s other subsidiaries offer fuel logistics, airport and ground-handling services, commercial real estate development, remote camp services, and customs modernization.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="presentation-item">
+                                <div class="images">
+                                    <div class="image1">
+                                        <img src="https://www.agility.com/wp-content/uploads/2017/08/CSR-image-children.jpg"
+                                         alt="Our Culture" style="height: 700px;">
+                                    </div>
+                                </div>
+                                <div class="presentation-container">
+                                    <div class="text-content">
+                                        <h2>Our Culture</h2>
+                                        <div class="presentation">
+                                            <p>At Agility, we take our responsibility to act with integrity, and give back, seriously. It’s the right thing to do, and it’s good for our business. A culture of acting responsibly benefits the communities where we work, contributes toward a cleaner planet, adds to the sense of pride and collective spirit among our employees and strengthens our relationship with customers and shareholders.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </mdb-card-body>
+        </mdb-card>
+        <mdb-card *ngIf="BindHeader !='Home'">
+
+          <mdb-card-header class="breadcrumb deep-orange lighten-1 white-text">
+            <li class="breadcrumb-item">
+              <i class="material-icons">star</i>
+              <a class="white-text" routerLink="">Home</a>
+            </li>
+
+            <li class="breadcrumb-item active">
+              <i class="material-icons">star</i>
+              {{BindHeader}}
+
+            </li>
+
+          </mdb-card-header>
+            <mdb-card-body>
+
+                <router-outlet></router-outlet>
+
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+
+</main>
+
+</section>
+
+<mdb-navbar SideClass="navbar-dark light fixed-bottom" *ngIf="BindHeader !='Login'">
+    <mdb-navbar-brand>
+        <div class="container-fluid">
+            © 2017 Copyright: <a class="navbar-brand" href="https://www.agility.com"> Agility.com </a>
+        </div>
+    </mdb-navbar-brand>
+</mdb-navbar>

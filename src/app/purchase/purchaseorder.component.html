@@ -1,0 +1,699 @@
+
+      <!-- <div class="row">
+            <div class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                        <form class="example-form">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" placeholder="search word" aria-label="Number" 
+                                  matInput [formControl]="searchTerm" [matAutocomplete]="auto">
+                                  <mat-autocomplete #auto="matAutocomplete">
+                                       
+                                        <mat-option *ngFor="let item of searchResult" [value]="item">
+                                          {{item}}
+                                        </mat-option>
+                                     
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                               
+                              </form>
+                             
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="container">
+            <!-- <div *ngIf="showp">
+                <app-alert-message [data]="NotificationData"></app-alert-message>
+            </div> -->
+            <div class="row alertnotification" *ngIf="lblshow" [appNotificationAlert]="color">
+                <div class="col-sm" style="color: white">{{Msg}} <span style="color: white;float: right;"><a  (click)="lblshow=false">x</a></span></div>
+              
+              </div>
+              
+              <div *ngIf="searchdiv">
+              <div class="row">
+                  <div class="col-sm">
+              
+                          <label>Order No</label>
+                          <input class="form-control" [(ngModel)]="searchcode">
+                  </div>           
+              
+                  <div class="col-sm">
+                                          <label>Vendor Name</label>
+                                          <input class="form-control" [(ngModel)]="searchname">
+                                 
+              </div>
+              <div class="col-sm">
+                     
+                      <button class="btn green-gradient btn-rounded btn-sm" 
+                      type="submit" style="float:right" (click)="Add()" *ngIf="IsAdd">Add</button>
+              </div>
+              </div>
+              <div class="row top"></div>
+              <div class="row td">
+                  <div class="col-sm">
+                          <button class="btn peach-gradient btn-rounded btn-sm" 
+                          type="submit" (click)="Search()">Search</button>
+                          <button class="btn red-gradient btn-rounded btn-sm" 
+                          type="submit" (click)="SearchClear()">Clear</button>
+                  </div>
+                  <div class="col-sm">
+                         
+                  </div>
+                  <div class="col-sm">  
+          
+                  </div>
+              </div>
+              <div class="row top"  *ngIf="gridData.length == 0">
+                  <div class="col-sm" style="color: red">No Record(s) Found!..</div>
+              </div>
+              <div class="row top" *ngIf="gridData.length != 0">
+                      <div class="col-sm">
+                             
+                      </div>
+                      <div class="col-sm"></div>
+                      <div class="col-sm">  
+          <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" aria-label="Search">
+                      </div>
+                  </div>
+                  <div class="row top" *ngIf="gridData.length != 0">
+                          <table class="table table-hover table-responsive-md mb-0">
+            
+                                  <!--Table head-->
+                                  <thead>
+                                    <tr>
+                                        <th></th>
+                                      <th scope="row">SNO
+                                              <a (click)="girdsortBy('PurchaseOrderID')" >
+                                                      <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                    </a>
+                                      </th>
+                                      <th>
+                                              <a (click)="girdsortBy('OrderNo')">Order No
+                                                      <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                    </a></th>
+                                      <th>
+                                              <a (click)="girdsortBy('OrderDate')">Order Date
+                                                      <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                    </a></th>
+                                                    <th>
+                                                      <a (click)="girdsortBy('VendorName')">Vendor Name
+                                                              <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                            </a></th>
+                                                            <th>
+                                                              <a (click)="girdsortBy('Status')">Status
+                                                                      <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                                    </a></th>
+                                      <th>
+                                          </th>
+                                    </tr>
+                                  </thead>
+                                  <!--Table head-->
+                            
+                                  <!--Table body-->
+                                  <tbody>
+                                    <tr *ngFor="let data of gridData | basecustompipe: { OrderNo: searchText, OrderDate: searchText,VendorName: searchText, Status: searchText} : false; let i = index"
+                                    >
+                                        <th><a  (click)="collapsed1=!collapsed1"><i class="fa fa-plus"></i></a></th>
+                                      <th px-3 *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex" scope="row">{{i+1}}</th>
+                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.OrderNo}}</td>
+                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.OrderDate}}</td>
+                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.VendorName}}</td>
+                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.Status}}</td>
+                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">
+                                          <div class="row">
+                                                      <div class="col col-lg-1">
+                                                                      <a (click)="View(data.PurchaseOrderID)" *ngIf="IsView">
+                                                                      <i class="fa fa-eye" aria-hidden="true" style="color: green;font-size: large;"></i>
+                                                                        </a>
+                                                                      </div>
+                                                      <div class="col col-lg-1">
+                                              <a (click)="Edit(data.PurchaseOrderID)" *ngIf="IsEdit">
+                                              <i class="fa fa-pencil" aria-hidden="true" style="color: green;font-size: large;"></i>
+                                                </a>
+                                              </div>
+                                              <div class="col col-lg-1">
+                                                <a (click)="Delete(data.PurchaseOrderID)" *ngIf="IsDelete">
+                                                      <i class="fa fa-remove" aria-hidden="true" style="color: red;font-size: large;"></i>
+                                                    </a>
+                                              </div>
+                                              </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody *ngIf="!collapsed1"><tr>
+                                      <td colspan="50">
+                                          <table cellpadding="0" cellspacing="0" class="STLevents" border="0">
+                                              <tbody>
+                                               
+                                              <tr style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                                  <td style="width: 10px;">&nbsp;</td>
+                                                  <td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td>
+                                              </tr>
+                                              
+                                              
+                                              <tr class="bottom" style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                                  <td style="width: 10px">&nbsp;</td>
+                                                  
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span></span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Melbourne VI<br>Australia</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Singapore<br>Singapore</span></td>
+                                  
+                                                      
+                                              </tr>
+                                              
+                                              <tr class="bottom" style="height: 35px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                                  <td style="width: 10px">&nbsp;</td>
+                                                  
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;">
+                                                            <span title=""><b>Booked</b></span>
+                                                            <div title="" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">
+                                                              &nbsp;6 Oct 17</div></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" 
+                                                          style="width:150px;padding-left:1px;border-left:solid 1px;position:static;">
+                                                          <span title="Bangkok, Thailand / 15 Oct 17 13:00 GMT">Estimated departure</span>
+                                                          <div title="Bangkok, Thailand / 15 Oct 17 13:00 GMT" 
+                                                          style="white-space:nowrap; font-size:9px; height:18px; width:90px;">
+                                                          &nbsp;15 Oct 17 20:00</div>
+                                                        </td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><span title="Melbourne VI, Australia / 16 Oct 17 00:00 GMT">Estimated arrival</span><div title="Melbourne VI, Australia / 16 Oct 17 00:00 GMT" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">&nbsp;16 Oct 17 10:00</div></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><span title="Singapore, Singapore / 18 Oct 17 02:00 GMT">Estimated delivery</span><div title="Singapore, Singapore / 18 Oct 17 02:00 GMT" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">&nbsp;18 Oct 17 10:00</div></td>
+                                  
+                                                      
+                                              </tr>
+                                              
+                                              <tr style="height: 14px;width:100%;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
+                                  </tr>
+                                  
+                                              
+                                              <tr class="top" style="height: 35px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                                  <td style="width: 10px;">&nbsp;</td>
+                                                  <td style="width: 75px">&nbsp;</td>
+                                                  
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Bangkok, Thailand / " style="height:18px; width:0px;">&nbsp;</div><span title="Bangkok, Thailand / ">Received</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Bangkok, Thailand / " style="height:18px; width:0px;">&nbsp;</div><span title="">Departed</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Melbourne VI, Australia / " style="height:18px; width:0px;">&nbsp;</div><span title="Melbourne VI, Australia / ">Arrived</span></td>
+                                  
+                                                      
+                                                          <td colspan="1" valign="top" align="left" style="padding-left:1px;border-left:solid 1px;position:static;width:75px;"><div title="Singapore, Singapore / " style="height:18px; width:0px;">&nbsp;</div><span title="Singapore, Singapore / ">Delivered</span></td>
+                                  
+                                                      
+                                              </tr>
+                                              
+                                              <tr class="top" style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                                  <td style="width: 10px;">&nbsp;</td>
+                                                  <td style="width: 75px">&nbsp;</td>
+                                                  
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
+                                  
+                                                      
+                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Melbourne VI<br>Australia</span></td>
+                                  
+                                                      
+                                                          <td colspan="1" valign="top" align="left" style="vertical-align:top;padding-top:2px;position:static;width:75px;"><span>Singapore<br>Singapore</span></td>
+                                  
+                                                      
+                                              </tr>
+                                              
+                                      <tr class="top" style="height: 10px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
+                                  </tr>
+                                  
+                                              
+                                          </tbody></table>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center">
+                
+                                      <!--Pagination -->
+                                      <nav class="my-4 pt-2">
+                                        <ul class="pagination pagination-circle pg-orange mb-0">
+                                  
+                                          <!--First-->
+                                          <li class="page-item clearfix d-none d-md-block" (click)="girdfirstPage()" [ngClass]="{disabled: girdactivePage == 1}">
+                                            <a class="page-link">First</a>
+                                          </li>
+                                  
+                                          <!--Arrow left-->
+                                          <li class="page-item" (click)="girdpreviousPage($event)" [ngClass]="{disabled: girdactivePage == 1}">
+                                            <a class="page-link" aria-label="Previous">
+                                              <span aria-hidden="true">&laquo;</span>
+                                              <span class="sr-only">Previous</span>
+                                            </a>
+                                          </li>
+                                  
+                                          <!--Numbers-->
+                                          <li #girdpages *ngFor="let page of girdpaginators | slice:girdfirstVisiblePaginator:girdlastVisiblePaginator; let i = index" class="page-item" [ngClass]="{active: i + girdfirstVisiblePaginator + 1 == girdactivePage}">
+                                              <a class="page-link waves-light" (click)="girdchangePage($event)" mdbWavesEffect>{{girdpage}}</a>
+                                          </li>      
+                                  
+                                  
+                                          <!--Arrow right-->
+                                          <li class="page-item" (click)="girdnextPage($event)" [ngClass]="{disabled: girdactivePage == girdnumberOfPaginators}">
+                                            <a class="page-link" aria-label="Next">
+                                              <span aria-hidden="true">&raquo;</span>
+                                              <span class="sr-only">Next</span>
+                                            </a>
+                                          </li>
+                                  
+                                          <!--First-->
+                                          <li class="page-item clearfix d-none d-md-block" (click)="girdlastPage()" [ngClass]="{disabled: girdactivePage == girdnumberOfPaginators}">
+                                            <a class="page-link">Last</a>
+                                          </li>
+                                  
+                                        </ul>
+                                      </nav>
+                                      <!--/Pagination -->
+                                  
+                                    </div>
+                  </div>
+              </div>
+              <div *ngIf="adddiv">
+                 
+              <form class="col s12 white" #ItemsForm="ngForm">
+                
+                    <ul class="nav nav-tabs md-tabs nav-justified orange" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" (click)="showtab(1)" role="tab"><strong>General</strong> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" (click)="showtab(2)" role="tab"><strong>Order Details</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" (click)="showtab(3)" role="tab"><strong>Documents</strong> </a>
+                        </li>
+                    </ul>
+                    <div *ngIf="one">   
+                      <fieldset class="fieldsetcls">General</fieldset>
+                         
+                  <div class="row">
+                      <div class="input-field col s5">
+                          Order No:
+                          <input type="text" class="validate" [disabled]="isView"  name="OrderNo" #OrderNo="ngModel" [(ngModel)]="podetails.OrderNo" required>
+                          <span style="color: red" *ngIf="OrderNo.invalid">Order No Is Required</span>
+                    </div>
+                      <div class="input-field col s5">
+                        Order Date
+                          <input type="text" class="form-control" placeholder="yyyy-mm-dd" class="validate" [disabled]="isView"
+                          name="OrderDate1" [(ngModel)]="podetails.OrderDate1" ngbDatepicker #OrderDate1="ngbDatepicker" (click)="OrderDate1.toggle()">
+                          <span style="color: red" *ngIf="OrderDate1.invalid">Order Date Is Required</span>
+                       <!-- Item Code
+                        <input type="text" class="validate" [disabled]="isView" autofocus name="ItemCode" #ItemCode="ngModel" [(ngModel)]="items.ItemCode" required>
+                         <span style="color: red" *ngIf="ItemCode.invalid">Item Code Is Required</span>
+                       -->
+                      
+                        </div>
+                        <div class="input-field col s2">
+                           
+                        </div>
+                    </div>
+                    <div class="row">                      
+                        <div class="input-field col s4">
+                            <label style="top: -36px !important">Vendor Master</label>  
+                            <select class="browser-default validate" [(ngModel)]="podetails.VendorID" name="VendorID" [disabled]="isView" (change)="onSelect($event.target.value)" required>                                
+                               
+                                <option [value]="0" selected="true">
+                                    Select Vendor
+                                </option><option *ngFor="let s of vendors" [value]="s.VendorID">
+                                    {{s.VendorName}}
+                                </option>
+                              </select>
+                        </div>
+                        <div class="input-field col s4">
+                           
+                          </div>
+                          <div class="input-field col s4">
+                           
+                            </div>
+                    </div>
+                   
+                  </div>   
+                   <div *ngIf="two">
+                      <fieldset class="fieldsetcls">Order Details</fieldset>  
+                    <div>
+                        <table class="table-striped table-responsive-md btn-table">
+      
+                            <!--Table head-->
+                            <thead>
+                              <tr>
+                                <th>Item Code
+                                </th>
+                                <th>
+                                  </th>
+                                <th>Item Name
+                                  </th>
+                                  <th>
+                                    </th>
+                                  <th style="width: 14%;">Category
+                                    </th>
+                                  <th style="width: 8%;">Item Price
+                                    </th>                                   
+                                      <th>CGST
+                                        </th>
+                                        <th>SGST
+                                          </th>
+                                          <th>IGST
+                                            </th>
+                                            <th>Quantity
+                                              </th>
+                                              <th>Discount
+                                                </th>
+                                                <!-- <th>Discount Price
+                                                  </th> -->
+                                              <th style="width: 9%;">Net Amount
+                                                </th>
+                                                <th></th>
+                              </tr>
+                            </thead>
+                            <!--Table head-->
+                      
+                            <!--Table body-->
+                            <tbody>
+                              <tr *ngFor="let l of LineItems; let i = index">
+                                  
+                                <td>
+                                  <!-- <input autocomplete="on" type="text" [ngModelOptions]="{standalone: true}" class="form-control"
+                                   [(ngModel)]="l.ItemCode"> -->
+                                   <kendo-autocomplete [disabled]="isView" [filterable]="true" [ngModelOptions]="{standalone: true}"
+                                   [data]="dataCode" (valueChange)="valueChange($event,i,'ItemCode')"
+                                   (filterChange)="filterChange($event,'ItemCode')" [(ngModel)]="l.ItemCode"
+                                   [placeholder]="'Select Item Code'"
+                                   >
+                               </kendo-autocomplete>
+                                </td>
+                                <td>
+                                    <span style="background-color: black;padding-top: 10px;">
+                                     
+                                      <a (click)="showm(i)">
+                                          <i class="material-icons" style="color: white !important">search</i>
+                                      </a>
+                                    </span>
+                                </td>
+                                <td>
+                                  <!-- <input type="text" [ngModelOptions]="{standalone: true}" 
+                                  class="form-control" [(ngModel)]="l.ItemName"> -->
+                                  <kendo-autocomplete [disabled]="isView" [filterable]="true" [ngModelOptions]="{standalone: true}"
+                                  [data]="dataName" [(ngModel)]="l.ItemName" (valueChange)="valueChange($event,i,'ItemName')"
+                                  (filterChange)="filterChange($event,i,'ItemName')"
+                                  [placeholder]="'Select Item Name'"
+                                  >
+                              </kendo-autocomplete>
+                                </td>
+                                <td>
+                                    <span style="background-color: black;padding-top: 10px;">
+                                     
+                                        <a (click)="showm(i)">
+                                            <i class="material-icons" style="color: white !important">search</i>
+                                        </a>
+                                      </span>
+                                </td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.CategoryName"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.ItemPrice"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.CGST"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.SGST"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.IGST"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="isView" 
+                                  (ngModelChange)="QuantityChange($event,i)" [ngModel]="l.Quantity"></td>
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [disabled]="true" [(ngModel)]="l.Discount"></td>
+                                <!-- <td><input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="l.DiscountPrice"></td> -->
+                                <td><input type="text" [ngModelOptions]="{standalone: true}" [disabled]="true" class="form-control" [(ngModel)]="l.NetAmount"></td>
+                                <td>
+                                  
+                                    <a (click)="LineDelete(l.PODetailID,i)" *ngIf="!isView">
+                                          <i class="fa fa-remove" aria-hidden="true" style="color: red;font-size: large;"></i>
+                                        </a>
+                                  
+                                </td>
+                              </tr>
+                            </tbody>
+                            <!--Table body-->
+                          </table>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            Total CGST:
+                            <input type="text" [disabled]="true"  name="TotalCGST" #TotalCGST="ngModel" [(ngModel)]="podetails.TotalCGST">
+                            
+                      </div>
+                      <div class="input-field col s4">
+                          Total SGST:
+                          <input type="text" [disabled]="true"  name="TotalSGST" #TotalSGST="ngModel" [(ngModel)]="podetails.TotalSGST">
+                         
+                    </div>
+                    <div class="input-field col s4">
+                        Total IGST:
+                        <input type="text" [disabled]="true"  name="TotalIGST" #TotalIGST="ngModel" [(ngModel)]="podetails.TotalIGST">
+                       
+                  </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4">
+                            Total Discount:
+                            <input type="text" [disabled]="true"  name="TotalDiscount" #TotalDiscount="ngModel" [(ngModel)]="podetails.TotalDiscount">
+                            
+                      </div>
+                      <div class="input-field col s4">
+                          Total Quantity:
+                          <input type="text" [disabled]="true"  name="TotalQunatity" #TotalQunatity="ngModel" [(ngModel)]="podetails.TotalQunatity">
+                         
+                    </div>
+                    <div class="input-field col s4">
+                        Total Amount:
+                        <input type="text" [disabled]="true"  name="TotalAmount" #TotalAmount="ngModel" [(ngModel)]="podetails.TotalAmount">
+                       
+                  </div>
+                    </div>
+                  </div>
+                  <div *ngIf="three">
+                      <fieldset class="fieldsetcls">Documents</fieldset>  
+                      <div>
+                          <table class="table-striped table-responsive-md btn-table">
+        
+                              <!--Table head-->
+                              <thead>
+                                <tr>
+                                  <th>File Name
+                                  </th>
+                                 
+                                  <th>File Path
+                                    </th>
+                                    <th>
+                                      Browse
+                                      </th>
+                                     
+                                                  <th></th>
+                                </tr>
+                              </thead>
+                              <!--Table head-->
+                        
+                              <!--Table body-->
+                              <tbody>
+                                <tr *ngFor="let d of Documents; let i = index">
+                                    
+                                  <td>
+                                      <input type="text" [ngModelOptions]="{standalone: true}" 
+                                      [disabled]="true" class="form-control" [(ngModel)]="d.FileName">
+                                  </td>
+                                  <td>
+                                      <input type="text" [ngModelOptions]="{standalone: true}" 
+                                      [disabled]="true" class="form-control" [(ngModel)]="d.FilePath">
+                                  </td>
+                                  <td>
+                                      <input type="file" [ngModelOptions]="{standalone: true}" *ngIf="d.FilePath ==''" 
+                                       class="form-control" (change)="fileChange($event,i)">
+                                       
+                                       <button class="btn red-gradient btn-rounded waves-effect waves-light" 
+                                       style="padding: 8px;width: -webkit-fill-available;" *ngIf="d.FilePath !=''" (click)="DownloadFile(d.FilePath,i)"> <i class="fa fa-download"></i>Download</button>
+                                  </td>
+                                 
+                                 
+                                  <td>
+                                    
+                                      <a (click)="DocumentDelete(d.DocumentID,i)" *ngIf="!isView">
+                                            <i class="fa fa-remove" aria-hidden="true" style="color: red;font-size: large;"></i>
+                                          </a>
+                                    
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <!--Table body-->
+                            </table>
+                        
+                      </div>
+                      </div>
+                  <div class="row">
+                      <div class="col-sm">
+                              <button [hidden]="savehide" class="btn bluegreen-gradient btn-rounded btn-sm" 
+                              type="submit" [disabled]="!ItemsForm.valid" (click)="Save()">Save</button>
+                              <button [hidden]="edithide" [disabled]="!ItemsForm.valid" (click)="Update()" class="btn bluegreen-gradient btn-rounded btn-sm" 
+                              type="submit">Update</button>
+                              <button [hidden]="clrhide" (click)="Clear()" class="btn peach-gradient btn-rounded btn-sm" 
+                              type="submit">Clear</button>
+                              <button [hidden]="cnlhide" class="btn redw-gradient btn-rounded btn-sm" 
+                              type="submit" (click)="Cancel()">Cancel</button>
+                      </div>
+                        
+                  </div>
+          </form>
+         
+            <div id="modal1" *ngIf="showmodal" class="modal modal-fixed-footer" [ngStyle]="{'display':displayVar}">
+                <div style="background: darkorange;">
+                   
+                  <a class="modal-close waves-effect waves-green btn-flat">Items</a>
+                </div>
+              <div class="modal-content">
+               
+                  <div class="row top"  *ngIf="ItemsData.length == 0">
+                      <div class="col-sm" style="color: red">No Record(s) Found!..</div>
+                  </div>
+                  <div class="row top" *ngIf="ItemsData.length != 0">
+                      <div class="col-sm"></div>
+                      <div class="col-sm"></div>
+                          <div class="col-sm">  
+              <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" aria-label="Search">
+                          </div>
+                      </div>
+                      <div class="row top" *ngIf="ItemsData.length != 0">
+                              <table class="table table-hover table-responsive-md mb-0">
+                
+                                      <!--Table head-->
+                                      <thead>
+                                        <tr>
+                                          <th scope="row">Select
+                                              
+                                          </th>
+                                          <th>
+                                                  <a (click)="sortBy('ItemCode')">Item Code
+                                                          <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                        </a></th>
+                                          <th>
+                                                  <a (click)="sortBy('ItemName')">ItemName
+                                                          <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                        </a></th>
+                                                        <th>
+                                                          <a (click)="sortBy('CategoryName')">Category
+                                                                  <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                                </a></th>
+                                                                <th>
+                                                                  <a (click)="sortBy('ItemPrice')">Item Price
+                                                                          <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                                                        </a></th>
+                                                                        <th style="width: 50px">
+                                                                            <a>Quantity                                                                                    
+                                                                                  </a></th>
+                                         
+                                        </tr>
+                                      </thead>
+                                      <!--Table head-->
+                                
+                                      <!--Table body-->
+                                      <tbody>
+                                        <tr *ngFor="let data of ItemsData | basecustompipe: { ItemCode: searchText, ItemName: searchText,CategoryName: searchText, ItemPrice: searchText} : false; let i = index">
+                                            
+                                          <th px-3 *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex"
+                                             scope="row">  <label>
+                                                <input type="checkbox" class="filled-in" [ngModel]="data.IsChecked" 
+                                                (ngModelChange)="ValueChanged($event,data.ItemID)" />
+                                                <span></span>
+                                              </label>
+                                            </th>
+                                          <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemCode}}</td>
+                                          <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemName}}</td>
+                                          <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.CategoryName}}</td>
+                                          <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemPrice}}</td>
+                                          <td style="width: 50px" *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">
+                                            <input type="text" (ngModelChange)="PQuantityChange($event,i)" [ngModel]="data.Quantity" 
+                                            [ngModelOptions]="{standalone: true}">
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                      <!--Table body-->
+                                    </table>
+                                    <div class="d-flex justify-content-center">
+                    
+                                          <!--Pagination -->
+                                          <nav class="my-4 pt-2">
+                                            <ul class="pagination pagination-circle pg-orange mb-0">
+                                      
+                                              <!--First-->
+                                              <li class="page-item clearfix d-none d-md-block" (click)="firstPage()" [ngClass]="{disabled: activePage == 1}">
+                                                <a class="page-link">First</a>
+                                              </li>
+                                      
+                                              <!--Arrow left-->
+                                              <li class="page-item" (click)="previousPage($event)" [ngClass]="{disabled: activePage == 1}">
+                                                <a class="page-link" aria-label="Previous">
+                                                  <span aria-hidden="true">&laquo;</span>
+                                                  <span class="sr-only">Previous</span>
+                                                </a>
+                                              </li>
+                                      
+                                              <!--Numbers-->
+                                              <li #pages *ngFor="let page of paginators | slice:firstVisiblePaginator:lastVisiblePaginator; let i = index" class="page-item" [ngClass]="{active: i + firstVisiblePaginator + 1 == activePage}">
+                                                  <a class="page-link waves-light" (click)="changePage($event)" mdbWavesEffect>{{page}}</a>
+                                              </li>      
+                                      
+                                      
+                                              <!--Arrow right-->
+                                              <li class="page-item" (click)="nextPage($event)" [ngClass]="{disabled: activePage == numberOfPaginators}">
+                                                <a class="page-link" aria-label="Next">
+                                                  <span aria-hidden="true">&raquo;</span>
+                                                  <span class="sr-only">Next</span>
+                                                </a>
+                                              </li>
+                                      
+                                              <!--First-->
+                                              <li class="page-item clearfix d-none d-md-block" (click)="lastPage()" [ngClass]="{disabled: activePage == numberOfPaginators}">
+                                                <a class="page-link">Last</a>
+                                              </li>
+                                      
+                                            </ul>
+                                          </nav>
+                                          <!--/Pagination -->
+                                      
+                                        </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close waves-effect waves-green btn-flat" (click)="Ok()">Ok</a>
+                  <a class="modal-close waves-effect waves-green btn-flat" (click)="showm()">Cancel</a>
+                </div>
+              </div>
+              <div class="modal-overlay" [ngStyle]="{'z-index': 1002,'display':displayVar,'opacity': 0.5}"></div>
+              </div>
+              
+              </div>
+            <!-- Nav tabs -->
+          

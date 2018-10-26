@@ -1,0 +1,107 @@
+
+<div>
+       
+        <div>
+<div class="row">
+    <div class="form-group">  
+      <label class="col-md-4">Search :</label>
+      <input type="text" class="col-md-8" [(ngModel)]="searchText" placeholder="Search By Value"/>
+    </div>
+    </div>
+     <div> 
+            <kendo-grid
+               [kendoGridBinding]="gridData | city: { IsDeleted:searchText,IsActive:searchText,CityID:searchText,StateID: searchText, 
+                CityName: searchText, StateName: searchText} : false"
+               [reorderable]="true"
+               [pageSize]="pageSize"
+               [skip]="skip"
+               [pageable]="true"
+               [sortable]="true"          
+               (pageChange)="pageChange($event)"
+               (click)="disableContextMenu()" oncontextmenu="return false;">            
+               <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridPDFCommand icon="file-pdf">Export to PDF</button>
+                    <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+                </ng-template>
+               <ng-template ngFor [ngForOf]="columns" let-column>
+                 <kendo-grid-column field="{{column}}" 
+                 [hidden]="hiddenColumns.indexOf(column) > -1"
+                    (contextmenu)="onrightClick($event)">
+                    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+                       <span                   
+                       (mouseleave)="onMouseLeave($event, column)">{{column.field}}</span>
+                       </ng-template>
+                     </kendo-grid-column>
+               </ng-template>
+               <kendo-grid-pdf fileName="Cities.pdf" [allPages]="true" paperSize="A4" [repeatHeaders]="true" [landscape]="true">
+                    <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
+                    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                     <div class="page-template">
+                        <div class="header">
+                          <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                          Cities List
+                        </div>
+                        <div class="footer">
+                          Page {{ pageNum }} of {{ totalPages }}
+                        </div>
+                      </div>
+                    </ng-template>
+                </kendo-grid-pdf>
+                <kendo-grid-excel fileName="Cities.xlsx"></kendo-grid-excel>
+           </kendo-grid> 
+          
+         </div>  
+    <!-- <div style="width: 100%">
+        <h3 class="first">Prime NG TableComponent</h3>
+      <p-table class="table table-hover table-responsive-md mb-0" [columns]="cols"
+       [value]="gridData" [reorderableColumns]="true" (click)="disableContextMenu()" 
+       oncontextmenu="return false;">
+        <ng-template pTemplate="header" let-columns>
+            <tr class="k-grid-header">
+               
+                <th *ngFor="let col of columns" pReorderableColumn 
+                [pSortableColumn]="col.field" (contextmenu)="onrightClick($event)">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+            <tr [pReorderableRow]="index">
+                
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+    </div> -->
+          <div class="contextmenu" *ngIf="IfClicked==true" [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY,'display':displayVar}">
+                <kendo-popup [popupClass]="'content popup'" [anchor]="anchor">
+                        <div id="div1" style="width: 80% !important;left: 20px;"><h5>Select Columns
+                                <span class="close">
+                                        <a href="javascript:void(0);" (click)="displayVar ='none'" 
+                                        style="color: #ec7812 !important;">x</a></span>
+                        </h5>
+                            <table class="table">
+                                 <tr class="row">
+                                    <th class="col-md-4" *ngFor="let c of griddatacolumns" [ngStyle]="{'left.px':20}">
+                                        <!-- <input type="checkbox" [ngModel]="c.IsChecked" 
+                                        (ngModelChange)="ValueChanged($event,c.ColumnName)">{{c.ColumnName}} -->
+                                        <label>
+                                            <input type="checkbox" class="filled-in" [ngModel]="c.IsChecked" 
+                                            (ngModelChange)="ValueChanged($event,c.ColumnName)" />
+                                            <span>{{c.ColumnName}}</span>
+                                          </label>
+                                    </th> 
+                                 </tr>
+                             </table>
+                            </div>
+                </kendo-popup>
+              </div>
+            
+        </div>
+        </div>
+    

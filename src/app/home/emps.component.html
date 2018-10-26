@@ -1,0 +1,123 @@
+
+
+    <div>
+          
+
+<div class="row">
+        <div class="col-md-4">
+            <div class="md-form">
+                <input mdbInputDirective type="text" id="form1" [(ngModel)]="searchText" class="form-control">
+                <label for="form1" class="">Search By Value</label>
+            </div>
+        </div>
+        </div>
+<div> 
+       
+        <kendo-grid class="table table-striped table-responsive-md btn-table"
+           [kendoGridBinding]="gridData | city: { IsDeleted:searchText,IsActive:searchText,EmpID:searchText,EmpName: searchText, 
+            EmpAddress: searchText, EmpMobile: searchText, DeptName: searchText, DeptID: searchText } : false"
+           [reorderable]="true" [resizable]="true"
+           [pageSize]="pageSize"
+           [skip]="skip"
+           [pageable]="true"
+           [sortable]="true"          
+           (pageChange)="pageChange($event)"
+           (click)="disableContextMenu()" oncontextmenu="return false;">            
+           <ng-template kendoGridToolbarTemplate>
+                <button kendoGridPDFCommand icon="file-pdf">Export to PDF</button>
+                <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+            </ng-template>
+           <ng-template ngFor [ngForOf]="columns" let-column>
+             <kendo-grid-column field="{{column}}" 
+             [hidden]="hiddenColumns.indexOf(column) > -1"
+                (contextmenu)="onrightClick($event)" [width]="100">
+                <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+                   <span (mouseenter)="onMouseEnter($event, column)"
+                   (mouseleave)="onMouseLeave($event, column)" title="{{column.field}}">{{column.field}}</span>                  
+                   </ng-template>
+                 </kendo-grid-column>
+           </ng-template>          
+             
+           <kendo-grid-pdf fileName="Emps.pdf" [allPages]="true" paperSize="A4" [repeatHeaders]="true" [landscape]="true">
+                <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
+                <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                 <div class="page-template">
+                    <div class="header">
+                      <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                      Employees List
+                    </div>
+                    <div class="footer">
+                      Page {{ pageNum }} of {{ totalPages }}
+                    </div>
+                  </div>
+                </ng-template>
+            </kendo-grid-pdf>
+            <kendo-grid-excel fileName="Emps.xlsx"></kendo-grid-excel>
+            
+       </kendo-grid>  
+        
+     </div> 
+     
+      <!-- <div class="contextmenu1" *ngIf="IfClicked1==true" [ngStyle]="{'left.px': contextmenuX1, 'top.px': contextmenuY1,'display':displayVar1}">
+            <kendo-popup [popupClass]="'content popup'" [anchor]="anchor">
+                    <div id="div2" style="width: 80% !important;left: 20px;"><h5></h5>
+                        <span>Right click for more options.
+                                <br> Columns headers can be dragged .
+                                <br> Right/Left to change position.
+                              </span>
+                        </div>
+            </kendo-popup>
+          </div> -->
+          <div class="contextmenu" *ngIf="IfClicked==true" [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY,'display':displayVar}">
+            <kendo-popup [popupClass]="'content popup'" [anchor]="anchor">
+                <kendo-splitter orientation="horizontal">
+                <kendo-splitter-pane min="40%">
+            <p>Tick columns to display<span class="close">
+                <a href="javascript:void(0);" (click)="displayVar ='none'" 
+                style="color: #ec7812 !important;">x</a></span></p>
+            <kendo-tabstrip [ngStyle]="{'font-size.px':12}">
+              <kendo-tabstrip-tab [title]="'Department'" [selected]="true" >
+                <ng-template kendoTabContent>
+                    <table class="table" style="width: 90%">
+                        <tr class="row">
+                                <ng-container  *ngFor="let c of griddatacolumns">
+                           <th class="col-md-5" [ngStyle]="{'left.px':20}"  [hidden]="!(c.ColumnName == 'DeptID' || c.ColumnName == 'DeptName')">
+                               <!-- <input type="checkbox" [ngModel]="c.IsChecked" 
+                               (ngModelChange)="ValueChanged($event,c.ColumnName)">{{c.ColumnName}} -->
+                               <label>
+                                <input type="checkbox" class="filled-in" [ngModel]="c.IsChecked" 
+                                (ngModelChange)="ValueChanged($event,c.ColumnName)" />
+                                <span>{{c.ColumnName}}</span>
+                              </label>
+                           </th>
+                        </ng-container> 
+                        </tr>
+                    </table>
+                </ng-template>
+              </kendo-tabstrip-tab>
+              <kendo-tabstrip-tab [title]="'Employees'">
+                <ng-template kendoTabContent>
+                    <table class="table" style="width: 90%">
+                        <tr class="row">
+                                <ng-container *ngFor="let c of griddatacolumns">
+                           <th class="col-md-5"  [ngStyle]="{'left.px':20}"  [hidden]="c.ColumnName == 'DeptID' || c.ColumnName == 'DeptName'">
+                            <label>
+                                <input type="checkbox" class="filled-in" [ngModel]="c.IsChecked" 
+                                (ngModelChange)="ValueChanged($event,c.ColumnName)" />
+                                <span>{{c.ColumnName}}</span>
+                              </label>
+                           </th> 
+                                </ng-container>
+                        </tr>
+                    </table>
+                </ng-template>
+              </kendo-tabstrip-tab>
+            
+            </kendo-tabstrip>
+        </kendo-splitter-pane>
+    </kendo-splitter>
+    </kendo-popup>
+</div>
+    </div>
+   
+ 

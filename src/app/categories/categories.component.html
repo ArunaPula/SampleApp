@@ -1,0 +1,222 @@
+<div class="container">
+    <div class="row alertnotification" *ngIf="lblshow" [appNotificationAlert]="color">
+        <div class="col-sm" style="color: white">{{Msg}} <span style="color: white;float: right;"><a  (click)="lblshow=false">x</a></span></div>
+      
+      </div>
+        <div *ngIf="searchdiv">
+        <div class="row">
+            <div class="col-sm">
+        
+                <div class="md-form">  
+                    <input mdbInputDirective id="searchcode" class="form-control" [(ngModel)]="searchcode">
+                    <label for="searchcode">Code</label>
+                  </div>           
+                </div> 
+            <div class="col-sm">
+                <div class="md-form">  
+                                  
+                                    <input mdbInputDirective id="searchname" class="form-control" [(ngModel)]="searchname">
+                                    <label for="searchname">Name</label>
+        </div>  </div>
+        <div class="col-sm">
+               
+                <button class="btn green-gradient btn-rounded btn-sm" 
+                type="submit" style="float:right" (click)="Add()" *ngIf="IsAdd">Add</button>
+        </div>
+        </div>
+        <div class="row top"></div>
+        <div class="row td">
+            <div class="col-sm">
+                    <button class="btn peach-gradient btn-rounded btn-sm" 
+                    type="submit" (click)="Search()">Search</button>
+                    <button class="btn red-gradient btn-rounded btn-sm" 
+                    type="submit" (click)="SearchClear()">Clear</button>
+            </div>
+            <div class="col-sm">
+                   
+            </div>
+            <div class="col-sm">  
+
+            </div>
+        </div>
+        <div class="row top"  *ngIf="gridData.length == 0">
+                        <div class="col-sm" style="color: red">No Record(s) Found!..</div>
+                    </div>
+        <div class="row top"  *ngIf="gridData.length > 0">
+                <div class="col-sm">
+                 
+                </div>
+                <div class="col-sm"></div>
+                <div class="col-sm">  
+    <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+           
+            <div class="row top" id="contentToConvert" *ngIf="gridData.length > 0">
+                   
+                    <table class="table table-hover table-responsive-md mb-0">
+      
+                            <!--Table head  <button class="btn btn-success btn-rounded btn-sm" (click)="captureScreen()">Generate PDF</button>-->
+                            <thead>
+                              <tr>
+                                <th scope="row">SNO
+                                        <a (click)="sortBy('CategoryID')" >
+                                                <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                              </a>
+                                </th>
+                                <th>
+                                        <a (click)="sortBy('CategoryCode')">Category Code
+                                                <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                              </a></th>
+                                <th>
+                                        <a (click)="sortBy('CategoryName')">Category Name
+                                                <mdb-icon icon="sort" class="ml-1"></mdb-icon>
+                                              </a></th>
+                                <th>
+                                    </th>
+                              </tr>
+                            </thead>
+                            <!--Table head-->
+                      
+                            <!--Table body-->
+                            <tbody>
+                              <tr *ngFor="let data of gridData | basecustompipe: { CategoryCode: searchText, CategoryName: searchText} : false; let i = index">
+                                  
+                                <th px-3 *ngIf="data.CategoryID >= firstVisibleIndex && data.CategoryID <= lastVisibleIndex" scope="row">{{i+1}}</th>
+                                <td *ngIf="data.CategoryID >= firstVisibleIndex && data.CategoryID <= lastVisibleIndex">{{data.CategoryCode}}</td>
+                                <td *ngIf="data.CategoryID >= firstVisibleIndex && data.CategoryID <= lastVisibleIndex">{{data.CategoryName}}</td>
+                                <td *ngIf="data.CategoryID >= firstVisibleIndex && data.CategoryID <= lastVisibleIndex">
+                                    <div class="row">
+                                                <div class="col col-lg-1">
+                                                                <a (click)="View(data.CategoryID)" *ngIf="IsView">
+                                                                <i class="fa fa-eye" aria-hidden="true" style="color: green;font-size: large;"></i>
+                                                                  </a>
+                                                                </div>
+                                                <div class="col col-lg-1">
+                                        <a (click)="Edit(data.CategoryID)" *ngIf="IsEdit">
+                                        <i class="fa fa-pencil" aria-hidden="true" style="color: green;font-size: large;"></i>
+                                          </a>
+                                        </div>
+                                        <div class="col col-lg-1">
+                                          <a (click)="Delete(data.CategoryID)" *ngIf="IsDelete">
+                                                <i class="fa fa-remove" aria-hidden="true" style="color: red;font-size: large;"></i>
+                                              </a>
+                                        </div>
+                                        </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <!--Table body-->
+                          </table>
+                          <div class="d-flex justify-content-center">
+      
+                                        <!--Pagination -->
+                                        <nav class="my-4 pt-2">
+                                          <ul class="pagination pagination-circle pg-orange mb-0">
+                                    
+                                            <!--First-->
+                                            <li class="page-item clearfix d-none d-md-block" (click)="firstPage()" [ngClass]="{disabled: activePage == 1}">
+                                              <a class="page-link">First</a>
+                                            </li>
+                                    
+                                            <!--Arrow left-->
+                                            <li class="page-item" (click)="previousPage($event)" [ngClass]="{disabled: activePage == 1}">
+                                              <a class="page-link" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                              </a>
+                                            </li>
+                                    
+                                            <!--Numbers-->
+                                            <li #pages *ngFor="let page of paginators | slice:firstVisiblePaginator:lastVisiblePaginator; let i = index" class="page-item" [ngClass]="{active: i + firstVisiblePaginator + 1 == activePage}">
+                                                <a class="page-link waves-light" (click)="changePage($event)" mdbWavesEffect>{{page}}</a>
+                                            </li>      
+                                    
+                                    
+                                            <!--Arrow right-->
+                                            <li class="page-item" (click)="nextPage($event)" [ngClass]="{disabled: activePage == numberOfPaginators}">
+                                              <a class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                              </a>
+                                            </li>
+                                    
+                                            <!--First-->
+                                            <li class="page-item clearfix d-none d-md-block" (click)="lastPage()" [ngClass]="{disabled: activePage == numberOfPaginators}">
+                                              <a class="page-link">Last</a>
+                                            </li>
+                                    
+                                          </ul>
+                                        </nav>
+                                        <!--/Pagination -->
+                                    
+                                      </div>
+                       
+                         <!--Bottom Table UI-->
+      
+                      <!--Bottom Table UI-->
+            </div>
+        </div>
+        <div *ngIf="adddiv">
+        <div class="row">
+                <div class="col-sm">
+                  
+                        <label>Category Code</label>
+                        <input class="form-control" autofocus name="CategoryCode" [(ngModel)]="CategoryCode" [disabled]="isView" required>               
+                        <span style="color: red" *ngIf="!CategoryCode">Category Code Is Required</span>
+                      </div>
+<div class="col-sm">
+        <label>Category Name</label>
+        <input class="form-control" name="CategoryName" [(ngModel)]="CategoryName" [disabled]="isView">    
+        <span style="color: red" *ngIf="!CategoryName">Category Name Is Required</span>           
+</div>
+<div class="col-sm"></div> 
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                    <button [hidden]="savehide" class="btn bluegreen-gradient btn-rounded btn-sm" 
+                    type="submit" [disabled]="!CategoryCode || !CategoryName" (click)="Save()">Save</button>
+                    <button [hidden]="edithide" (click)="Update()" class="btn bluegreen-gradient btn-rounded btn-sm" 
+                    type="submit" [disabled]="!CategoryCode || !CategoryName">Update</button>
+                    <button [hidden]="clrhide" (click)="Clear()" class="btn peach-gradient btn-rounded btn-sm" 
+                    type="submit">Clear</button>
+                    <button [hidden]="cnlhide" class="btn btn-danger redw-gradient btn-rounded btn-sm" 
+                    type="submit" (click)="Cancel()">Cancel</button>
+            </div>
+              
+        </div>
+        </div>
+        </div>
+
+        <!-- <div class="container1 mat-elevation-z8">
+         
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+          <mat-table #table [dataSource]="dataSource" matSort>
+          
+            <ng-container matColumnDef="CategoryID">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.CategoryID}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="CategoryCode">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Category Code </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.CategoryCode}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="CategoryName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Category Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.CategoryName}} </mat-cell>
+            </ng-container>
+        
+         
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "rowClicked(row)" ></mat-row>
+          </mat-table>
+          <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
+          </mat-paginator>
+        </div> -->
+       
+       
+       

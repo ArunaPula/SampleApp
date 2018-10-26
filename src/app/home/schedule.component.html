@@ -1,0 +1,63 @@
+<div>
+    <div class="row">
+       
+<div class="form-group">
+        <mdb-icon icon="exclamation-circle" size="lg"> 
+          </mdb-icon>
+          <label>Complete these details to schedule the report</label>
+</div>
+    </div> 
+    <div class="row" style="text-align: left;">
+        <div class="col-md-12">
+                <h4>Schedule Time</h4>              
+        </div>
+                    
+    </div>
+  
+  <div class="col-md-4">                       
+     <div class="md-form">                           
+           <input mdbInputDirective type="text" id="lbltimeform" [(ngModel)]="Time" class="form-control">
+            <label for="lbltimeform">Time(24 hours format):</label>                             
+     </div>
+   </div>
+   <div class="row" style="text-align: left;">
+        <div class="col-md-12">
+                <h4>Frequency</h4>               
+        </div>
+                    
+    </div> 
+    <div class="col-md-12">
+    <div class="col-md-5">
+    <div class="row">
+            <div class="form-check">
+                   
+                    <label>
+                        <input name="group1" type="radio" checked />
+                        <span>Daily</span>
+                      </label>
+                  </div>
+                  </div>
+                  <div class="row">
+                        <div class="form-check">
+                                
+                                <label>
+                                        <input name="group1" type="radio" checked />
+                                        <span>Weekly</span>
+                                      </label>
+                              </div>                              
+                  </div>
+                 <div class="row">
+                        <div class="form-check">
+                               
+                                <label>
+                                        <input name="group1" type="radio" checked />
+                                        <span>Monthly</span>
+                                      </label>
+                              </div>
+                 </div>
+                </div> 
+                
+        </div>    
+
+         
+</div>

@@ -1,0 +1,247 @@
+<!--
+<div class="modal" style="display: block !important;height: 480px;top: 100px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog form-dark" role="document">
+      
+        <div class="modal-content card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table%20(7).jpg');">
+            <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+              
+                <div class="modal-header text-center pb-4">
+                    <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel"><strong>SIGN</strong> <a class="orange-text font-weight-bold"><strong> UP</strong></a></h3>
+                   
+                </div>
+               
+                <div class="modal-body">
+                   
+                    <div class="md-form">
+                        <input type="email" id="Form-email5" [(ngModel)]="email" placeholder="Your Email" class="form-control validate white-text" (keyup.enter)="Login()">
+                        <label for="Form-email5">Your email</label>
+                    </div>
+
+                    <div class="md-form pb-3">
+                        <input type="password" id="Form-pass5" [(ngModel)]="password" class="form-control validate white-text" (keyup.enter)="Login()">
+                        <label  for="Form-pass5">Your password</label>
+                       
+                    </div>
+
+                   
+                    <div class="row d-flex align-items-center mb-4">
+
+                        
+                        <div class="text-center mb-3 col-md-12">
+                            <button type="button" class="btn btn-success btn-block btn-rounded z-depth-1" (keyup.enter)="Login()" (click)="Login()">Sign up</button>
+                         <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" *ngIf="userexits">
+                               
+                            {{lblstatus}}
+                          </label>
+                        </div>
+                      
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+-->
+<!-- Default form login -->
+<!-- <div class="modal-content card card-image" style="margin: 0px auto;background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table%20(7).jpg');width:500px;">
+<form class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+    <div class="modal-header text-center pb-4" >
+        <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel"><strong>SIGN</strong> <a class="font-weight-bold" style="color: #dc590a !important"><strong> UP</strong></a></h3>
+      </div>
+    <div class="modal-body"></div>
+   
+    <input type="email" id="defaultLoginFormEmail" [(ngModel)]="email" name="email" 
+    class="form-control mb-4" placeholder="E-mail" (keyup.enter)="Login()">
+    
+    
+    <input type="password" id="defaultLoginFormPassword" [(ngModel)]="password" name="password"  
+    class="form-control mb-4" size="5" placeholder="Password" (keyup.enter)="Login()">
+
+    <div class="row d-flex align-items-center mb-4">
+            <div class="text-center mb-3 col-md-12">
+    
+    <button class="btn btn-warning btn-block my-4" style="background-color: #dc590a !important" type="submit" 
+    (click)="Login()" (keyup.enter)="Login()">Sign in</button>
+    <img *ngIf="loading"  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                         <label style="color: white !important;" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" *ngIf="userexits">
+                           {{lblstatus}}
+                          </label>
+                        </div>
+                        </div>                       
+</form>
+
+</div> -->
+<ngx-toasta [position]="'top-center'"></ngx-toasta>
+  <div class="container1" style="margin: 130px auto;">
+    
+      <div class="row">
+          <div class="col s8 offset-s2" style="margin: 0px auto;">
+    <div class="card grey lighten-2" style="margin: 0px auto;border-radius: 20px;">
+      
+      <div class="card-tabs">
+        <ul class="tabs tabs-fixed-width" style="border-top-left-radius: 20px;border-top-right-radius: 20px;">
+          <li class="tab"><a (click)="Show('SignUp')">Sign Up</a></li>
+          <li class="tab"><a class="active" (click)="Show('SignIn')">Sign In</a></li>
+          
+        </ul>
+      </div>
+      <div class="card-content grey lighten-4"  style="border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">
+        <div *ngIf="SignUp">
+           
+           <form class="col s12 white" #UserSignForm="ngForm" (ngSubmit)="OnSubmit(UserSignForm)">
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input type="text" class="validate" minlength="5" autofocus name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" required>
+                    <label for="FirstName">First Name</label>
+                    <div *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)"
+                    class="alert alert-danger">
+                
+                  <div *ngIf="FirstName.errors.required">
+                    FirstName is required.
+                  </div>
+                  <div *ngIf="FirstName.errors.minlength">
+                    FirstName must be minimum 5 characters.
+                  </div>
+                  
+                
+                </div>  
+                  </div>
+                  <div class="input-field col s6">
+                        <input type="text" class="validate" minlength="3" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" required>
+                        <label for="LastName">Last Name</label>
+                        <div *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)"
+                    class="alert alert-danger">
+                
+                  <div *ngIf="LastName.errors.required">
+                    LastName is required.
+                  </div>
+                  <div *ngIf="LastName.errors.minlength">
+                    LastName must be minimum 3 characters.
+                  </div>
+                  
+                
+                </div> 
+                  </div>
+                </div>
+                
+                <div class="row">
+                        <div class="input-field col s12">                          
+                          <input type="text" class="validate" minlength="5" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+                        <label for="UserName">User Name</label>
+                        <div *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)"
+                        class="alert alert-danger">
+                    
+                      <div *ngIf="UserName.errors.required">
+                        UserName is required.
+                      </div>
+                      <div *ngIf="UserName.errors.minlength">
+                        UserName must be minimum 5 characters.
+                      </div>
+                      
+                    
+                    </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        
+                          <div class="input-field col s12">
+                              <label style="top: -36px !important">Role Type</label>  
+                              <select class="browser-default validate" name="Role" (change)="onSelect($event.target.value)" required>                                
+                                 
+                                  <option [value]="user.RoleID" selected="true">
+                                      Select Role
+                                  </option><option *ngFor="let s of roles" [value]="s.Id">
+                                      {{s.Name}}
+                                  </option>
+                                </select>
+                               
+                 
+                            </div>
+                      </div>
+                      <div class="row">
+                            <div class="input-field col s12">                          
+                              <input type="email" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required>
+                            <label for="Email">Email</label>
+                          
+                            <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+                            class="alert alert-danger">
+                        
+                          <div *ngIf="Email.errors.required">
+                            Email is required.
+                          </div>
+                          <div *ngIf="Email.errors.pattern">
+                            Email should be like a@gmail.com format.
+                          </div>
+                          
+                        
+                        </div>   
+                        </div>
+                          </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                   
+                    <input type="password" class="validate" name="Password" minlength="3" #Password="ngModel" [(ngModel)]="user.Password" required>
+                        <label for="Password">Password</label>
+                        <div *ngIf="Password.invalid && (Password.dirty || Password.touched)"
+                            class="alert alert-danger">
+                        
+                          <div *ngIf="Password.errors.required">
+                            Password is required.
+                          </div>
+                          <div *ngIf="Password.errors.minlength">
+                            Password must be 3 characters.
+                          </div>
+                          
+                        
+                        </div> 
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col s12">
+                        <button class="btn-large peach-gradient btn-rounded btn-submit btn-block" [disabled]="!UserSignForm.valid" type="submit">Submit</button>
+                    </div>
+                </div>
+              </form>
+        </div>
+        <div *ngIf="SignIn">
+                <form class="col s12 white" #UserLoginForm="ngForm" (ngSubmit)="OnSubmitLogin(UserName,Password)">
+                        
+                              <div class="row">
+                                   
+                                    <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input type="text" class="validate" autofocus name="UserName" #UserName ngModel required>
+                                            <label for="UserName">UserName</label>
+                                            <!-- <span style="color: red" *ngIf="!UserName">UserName should be min 5 chars</span>  -->
+                                          </div>
+                                  </div>
+                        <div class="row">
+                                <div class="input-field col s12">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input type="password" class="validate" minlength="3" name="Password" #Password ngModel required>
+                                        <label for="Password">Password</label>
+                                        <!-- <span style="color: red" *ngIf="!Password">Password should be min 3 chars</span> -->
+                                      </div>
+                         
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn-large peach-gradient btn-rounded btn-submit btn-block" [disabled]="!UserLoginForm.valid" type="submit">Submit</button>
+                            </div></div>
+                        
+                      </form>
+        </div>
+       
+      </div>
+    </div>
+</div>
+</div>
+
+
+  </div>
+  
+<!-- Default form login -->
