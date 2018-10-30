@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA,Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+
 //import { APP_BASE_HREF } from '@angular/common';
 //import {ToasterModule, ToasterService} from 'angular2-toaster';
 import {ToastaModule} from 'ngx-toasta';

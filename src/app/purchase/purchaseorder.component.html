@@ -464,35 +464,40 @@
                     <div class="row">
                         <div class="input-field col s4">
                             Total CGST:
-                            <input type="text" [disabled]="true"  name="TotalCGST" #TotalCGST="ngModel" [(ngModel)]="podetails.TotalCGST">
-                            
+                            <input type="text"  [disabled]="true" name="TotalCGST" #TotalCGST="ngModel"
+                             [(ngModel)]="podetails.TotalCGST" [required]="false">
+                           
                       </div>
                       <div class="input-field col s4">
                           Total SGST:
-                          <input type="text" [disabled]="true"  name="TotalSGST" #TotalSGST="ngModel" [(ngModel)]="podetails.TotalSGST">
-                         
+                          <input type="text"  [disabled]="true" name="TotalSGST" #TotalSGST="ngModel"
+                           [(ngModel)]="podetails.TotalSGST" [required]="false">
+                        
                     </div>
                     <div class="input-field col s4">
                         Total IGST:
-                        <input type="text" [disabled]="true"  name="TotalIGST" #TotalIGST="ngModel" [(ngModel)]="podetails.TotalIGST">
+                        <input type="text" [disabled]="true"  name="TotalIGST" #TotalIGST="ngModel" 
+                        [(ngModel)]="podetails.TotalIGST" [required]="false">
                        
                   </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4">
                             Total Discount:
-                            <input type="text" [disabled]="true"  name="TotalDiscount" #TotalDiscount="ngModel" [(ngModel)]="podetails.TotalDiscount">
-                            
+                            <input type="text"  [disabled]="true"  name="TotalDiscount" #TotalDiscount="ngModel" 
+                            [(ngModel)]="podetails.TotalDiscount" [required]="false">
+                           
                       </div>
                       <div class="input-field col s4">
                           Total Quantity:
-                          <input type="text" [disabled]="true"  name="TotalQunatity" #TotalQunatity="ngModel" [(ngModel)]="podetails.TotalQunatity">
-                         
+                          <input type="text"  [disabled]="true"  name="TotalQunatity" #TotalQunatity="ngModel"
+                           [(ngModel)]="podetails.TotalQunatity" [required]="false">
+                          
                     </div>
                     <div class="input-field col s4">
                         Total Amount:
-                        <input type="text" [disabled]="true"  name="TotalAmount" #TotalAmount="ngModel" [(ngModel)]="podetails.TotalAmount">
-                       
+                        <input type="text" [disabled]="true"  name="TotalAmount" #TotalAmount="ngModel"
+                         [(ngModel)]="podetails.TotalAmount" [required]="false">
                   </div>
                     </div>
                   </div>

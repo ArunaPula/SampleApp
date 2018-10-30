@@ -28,12 +28,19 @@ body { font-family: "RobotoRegular",Helvetica,Arial,sans-serif;
   border-radius: 2px; 
   width: 40%; 
    }
+   .cardmenu{
+    margin-left: 151px;
+  }
+  .cardmenu-hide{
+    margin-left: 0px;
+  }
    .k-pager-numbers .k-link.k-state-selected, .k-pager-numbers .k-link:link.k-state-selected{
     border-radius: 50% !important;
   }
   .k-pager-wrap .k-link:hover, .k-pager-wrap .k-state-selected{
    border-radius: 50% !important;
   }
+  
    .contextmenu1{
      z-index: 10001;
    position: absolute;
