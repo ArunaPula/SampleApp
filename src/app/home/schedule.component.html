@@ -7,57 +7,254 @@
           <label>Complete these details to schedule the report</label>
 </div>
     </div> 
-    <div class="row" style="text-align: left;">
-        <div class="col-md-12">
-                <h4>Schedule Time</h4>              
-        </div>
-                    
+    <div style="background: #f1f1f1;height: 30%;border: 1px solid #b7b6b6;">
+                <div class="row" style="text-align: left;">
+                                <div class="col-md-12">
+                                        <h4 class="schedule-heading">Schedule Time</h4>              
+                                </div>
+                                            
+                            </div>
+                            <div class="col-md-4">                       
+                                        <div class="md-form">                           
+                                              <input mdbInputDirective type="text" id="lbltimeform" 
+                                              [(ngModel)]="Time" class="form-control">
+                                               <label for="lbltimeform">Time(24 hours format):</label>                             
+                                        </div>
+                                      </div>
     </div>
   
-  <div class="col-md-4">                       
-     <div class="md-form">                           
-           <input mdbInputDirective type="text" id="lbltimeform" [(ngModel)]="Time" class="form-control">
-            <label for="lbltimeform">Time(24 hours format):</label>                             
-     </div>
-   </div>
+  
+    <div style="background: #f1f1f1;height: 30%;border: 1px solid #b7b6b6;margin-top: 42px;">
    <div class="row" style="text-align: left;">
         <div class="col-md-12">
-                <h4>Frequency</h4>               
+                <h4  class="schedule-heading">Frequency</h4>               
         </div>
                     
     </div> 
-    <div class="col-md-12">
-    <div class="col-md-5">
+ 
     <div class="row">
-            <div class="form-check">
+            <div class="col-md-5">
+                        <div class="form-check">
                    
-                    <label>
-                        <input name="group1" type="radio" checked />
-                        <span>Daily</span>
-                      </label>
-                  </div>
+                                        <label>
+                                            <input name="group1" type="radio" value="Daily" (click)="setradio('Daily')"  [checked]="Daily" ngModel />
+                                            <span>Daily</span>
+                                          </label>
+                                      </div>
+            </div>
+            <div class="vl" style="margin-bottom: -20px;"></div>
+           <div class="col-md-6"  *ngIf="Daily">
+               
+                        <table>
+                                        <tr>
+                                                <td style="width: 1%;">Every</td>
+                                                <td style="width: 16%;"><input type="text" value="0" style="margin-top: -15px;height: 1.5em;"></td>
+                                                <td><span>day(s)</span></td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                        </tr>
+                                </table>
+           </div>
+           <div class="col-md-6" *ngIf="Weekly">
+                        <table>
+                                        <tr>
+                                                <td>Every</td>
+                                                <td><input type="text" value="0" style="margin-left: -63px;margin-top: -15px;height: 1.5em;"></td>
+                                                <td><span style="margin-left: -62px;">week(s) on</span></td>
+                                               <td>&nbsp;</td>
+                                               <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                                <td> <div class="form-check">
+                   
+                                                                <label>
+                                                                    <input name="group1" type="checkbox" value="Monday" ngModel />
+                                                                    <span>Monday</span>
+                                                                  </label>
+                                                              </div>
+                                                        </td>
+                                                <td>
+                                                                <div class="form-check">
+                   
+                                                                                <label>
+                                                                                    <input name="group1" type="checkbox" value="Tuesday" ngModel />
+                                                                                    <span>Tuesday</span>
+                                                                                  </label>
+                                                                              </div>
+                                                </td>
+                                                <td>
+                                                                <div class="form-check">
+                   
+                                                                                <label>
+                                                                                    <input name="group1" type="checkbox" value="Wednesday" ngModel />
+                                                                                    <span>Wednesday</span>
+                                                                                  </label>
+                                                                              </div>
+                                                </td>
+                                                <td>
+                                                                <div class="form-check">
+                   
+                                                                                <label>
+                                                                                    <input name="group1" type="checkbox" value="Thursday" ngModel />
+                                                                                    <span>Thursday</span>
+                                                                                  </label>
+                                                                              </div>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                                        <td> <div class="form-check">
+                           
+                                                                        <label>
+                                                                            <input name="group1" type="checkbox" value="Friday" ngModel />
+                                                                            <span>Friday</span>
+                                                                          </label>
+                                                                      </div>
+                                                                </td>
+                                                        <td>
+                                                                        <div class="form-check">
+                           
+                                                                                        <label>
+                                                                                            <input name="group1" type="checkbox" value="Saturday" ngModel />
+                                                                                            <span>Saturday</span>
+                                                                                          </label>
+                                                                                      </div>
+                                                        </td>
+                                                        <td>
+                                                                        <div class="form-check">
+                           
+                                                                                        <label>
+                                                                                            <input name="group1" type="checkbox" value="Sunday" ngModel />
+                                                                                            <span>Sunday</span>
+                                                                                          </label>
+                                                                                      </div>
+                                                        </td>
+                                                        <td> &nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                </tr>
+                                </table>
+                </div> 
+                <div class="col-md-6" *ngIf="Monthly">
+                        <table>
+                                <tr>
+                                        <td>
+                                                       
+                                                                            
+                                                                             <div class="form-check">    <label style="color: #0c0c0c;font-size: 1.0rem;">
+                                                                                        <input name="group1" type="radio" value="NoDay1"  [checked]="NoDay1" ngModel />    
+                                                                                        <span>  Day
+                                                                                                       <select  class="browser-default validate">
+                                                                                                               <option [value]="1" selected="true">First</option>
+                                                                                                               <option [value]="2">Second</option>
+                                                                                                               <option [value]="3">Third</option>
+                                                                                                               <option [value]="4">Fourth</option>
+                                                                                                               <option [value]="0">Last</option>
+                                                                                                       </select> &nbsp;
+                                                                                                        of every &nbsp;<select  class="browser-default validate">
+                                                                                                                        <option [value]="0" selected="true">Sunday</option>
+                                                                                                                        <option [value]="1">Monday</option>
+                                                                                                                        <option [value]="2">Tuesday</option>
+                                                                                                                        <option [value]="3">Wednesday</option>
+                                                                                                                        <option [value]="4">Thursday</option>
+                                                                                                                        <option [value]="5">Friday</option>
+                                                                                                                        <option [value]="6">Saturday</option>
+                                                                                                                </select>
+                                                                                                month(s)</span>
+                                                                                             </label>
+                                                                                             </div>
+                                                                                             <br>
+                                                                                             <div class="form-check">    <label style="color: #0c0c0c;font-size: 1.0rem;">
+                                                                                                        <input name="group1" type="radio" value="NoDay"  [checked]="NoDay" ngModel />    
+                                                                                                        <span>  The
+                                                                                                                        <input type="text" value="1" style="height: 1.5em;width: 10%"> &nbsp;
+                                                                                                                        <input type="text" value="1" style="height: 1.5em;width: 10%;">
+                                                                                                               of every <input type="text" value="1" style="height: 1.5em;width: 10%;"> month(s)</span>
+                                                                                                             </label>
+                                                                                                             </div>
+                                             
+                                        </td>
+                                        
+                                </tr>
+                        </table>
+                        </div>  
                   </div>
                   <div class="row">
-                        <div class="form-check">
-                                
-                                <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Weekly</span>
-                                      </label>
-                              </div>                              
+                          <div class="col-md-5">
+                                        <div class="form-check">
+                                                        <label>
+                                                                <input name="group2" type="radio"  value="Weekly" (click)="setradio('Weekly')" [checked]="Weekly" ngModel/>
+                                                                <span>Weekly</span>
+                                                              </label>
+                                                      </div> 
+                          </div>
+                          <div class="vl" style="margin-bottom: -20px;"></div>
+                                                  
                   </div>
                  <div class="row">
-                        <div class="form-check">
-                               
-                                <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Monthly</span>
-                                      </label>
-                              </div>
+                         <div class="col-md-5">
+                                        <div class="form-check">
+                                                        <label>
+                                                                <input name="group3" type="radio" value="Monthly" (click)="setradio('Monthly')"  [checked]="Monthly" ngModel/>
+                                                                <span>Monthly</span>
+                                                              </label>
+                                                      </div>
+                         </div>
+                         <div class="vl"></div>
+                         
                  </div>
-                </div> 
-                
-        </div>    
+              
+        </div>
 
-         
+        <div style="background: #f1f1f1;height: 30%;border: 1px solid #b7b6b6;margin-top: 42px;">
+                        <div class="row" style="text-align: left;">
+                             <div class="col-md-12">
+                                     <h4  class="schedule-heading">Period</h4>               
+                             </div>
+                             <table>
+                                        <tr>
+                                                <td>
+                                                        <div class="form-check">    <label style="color: #0c0c0c;font-size: 1.0rem;">
+                                                                            
+                                                                        <span>Start date<kendo-datepicker
+                                                                                [(value)]="value"></kendo-datepicker></span>
+                                                                             </label>
+                                                                             </div>
+                                                </td>
+                                                <td>
+                                                        <div class="form-check">
+                                                             <label style="color: #0c0c0c;">
+                                                                 <input name="group1" type="radio" value="RNoEndDate"  [checked]="RNoEndDate" ngModel />
+                                                                 <span>No end date</span>
+                                                               </label>
+                                                           </div>
+                                                           <br>
+                                                           <div class="form-check">
+                                                                <label style="color: #0c0c0c;">
+                                                                    <input name="group1" type="radio" value="REndAfterDate"  [checked]="REndAfterDate" ngModel />
+                                                                    <span>End after <input type="text" value="0" style="width: 11%;height: 1.5em;">scheduled runs</span>
+                                                                   
+                                                                  </label>
+                                                                 
+                                                              </div> 
+                                                              <br>
+                                                              <div class="form-check">
+                                                                   <label style="color: #0c0c0c;">
+                                                                       <input name="group1" type="radio" value="RLatestEndDate"  [checked]="RLatestEndDate" ngModel />
+                                                                       <span>Latest end date</span>
+                                                                     </label>
+                                                                    
+                                                                 </div>    <kendo-datepicker style="margin-top: -60px;margin-left: 164px;"
+                                                                        [(value)]="LatestEndDate"></kendo-datepicker>
+                                                                      
+                                                     </td>
+                                               
+                                        </tr>
+                                       
+                                     
+                                </table>     
+                         </div> 
+                     
+                             </div>
+                             <button class="btn green-gradient btn-rounded btn-sm" type="submit">Next</button>
+                             <button class="btn green-gradient btn-rounded btn-sm" type="submit">Cancel</button>               
 </div>

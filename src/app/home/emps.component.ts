@@ -74,8 +74,8 @@ onDocumentRightClick(event)
       {
       this.IfClicked=false;
       this.IfClicked=true;
-      this.contextmenuX=event.clientX-50;
-      this.contextmenuY=event.clientY-120;
+      this.contextmenuX=event.clientX-190;
+      this.contextmenuY=event.clientY-90;
       this.displayVar='block';
       
       }
@@ -87,8 +87,8 @@ onRightClick(event)
     {
       this.IfClicked=false;
       this.IfClicked=false;
-      this.contextmenuX=event.clientX-50;
-      this.contextmenuY=event.clientY-120;
+      this.contextmenuX=event.clientX-190;
+      this.contextmenuY=event.clientY-90;
       this.displayVar='block';
       event.stopPropagation(); 
     }
@@ -120,8 +120,7 @@ public disableContextMenu(){
 }
 
 public onMouseEnter (e,col) 
-{
-  
+{  
       if(e.path[2].className=="k-header")
       {
           if(this.griddatacolumns.length>0)
@@ -182,9 +181,7 @@ public fileChange(event): FormData {
             this._appService.PostEmpColumnsOrder(this.griddatacolumns).
                             subscribe(data => {  
                             if (data >= 1) 
-                            {
-                              this.ServiceStatus="Success";
-                            }   
+                            {this.ServiceStatus="Success";}   
                             });
         }
     }

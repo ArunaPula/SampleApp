@@ -22,7 +22,7 @@ public getData():Observable<Items[]> {
     return this._http.get(this.BasicPath+'GetData?'+'code='+code+'&name='+name+'&category='+category).map((res:Response) => <Items[]> res.json());
   } 
   public Generate():Observable<string> {
-    let headers = new Headers({ 'Content-Type': 'application/pdf' });
+    let headers = new Headers({ 'Content-Type':'application/pdf' });
     let options = new RequestOptions({ headers: headers });
     return this._http.get(this.BasicPath+'GeneratePDF', options).map((res:Response) => <string> res.json());
   } 
@@ -35,8 +35,7 @@ public getData():Observable<Items[]> {
     return this._http.post(this.BasicPath+'Post', body, options )
     .map((response: Response) => < any > response.json()).catch(this.handleError);
   }
-  public handleError(error: Response) {  
-    console.error(error);  
+  public handleError(error: Response) {
     return Observable.throw(error.json().error || 'Server error');  
   }
 }

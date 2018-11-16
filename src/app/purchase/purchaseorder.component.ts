@@ -1,197 +1,16 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { PurchaseService } from './purchase.service';
 import { Items1,PurchaseOrderModel,PODetails,VendorList,POAttachments } from './purchaseordermodel';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
-import { element } from '@angular/core/src/render3/instructions';
 import{ALertMsg} from '../model';
 import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'purchaseorder-component',
-  templateUrl: './purchaseorder.component.html',
-  styles:[`.form-dark .font-small {
-    font-size: 0.8rem; }
+  templateUrl: './purchaseorder.component.html'
   
-  .form-dark [type="radio"] + label,
-  .form-dark [type="checkbox"] + label {
-    font-size: 0.8rem; }
-  
-  .form-dark [type="checkbox"] + label:before {
-    top: 2px;
-    width: 15px;
-    height: 15px; }
-  
-  .form-dark .md-form label {
-    color: #fff; }
-  
-  .form-dark input[type=email]:focus:not([readonly]) {
-    border-bottom: 1px solid rgb(223, 110, 18);
-    -webkit-box-shadow: 0 1px 0 0 rgb(223, 110, 18);
-    box-shadow: 0 1px 0 0 rgb(223, 110, 18); }
-  
-  .form-dark input[type=email]:focus:not([readonly]) + label {
-    color: #fff; }
-  
-  .form-dark input[type=password]:focus:not([readonly]) {
-    border-bottom: 1px solid rgb(223, 110, 18);
-    -webkit-box-shadow: 0 1px 0 0 rgb(223, 110, 18);
-    box-shadow: 0 1px 0 0 rgb(223, 110, 18); }
-    input[type=email]:focus:not([readonly]) + label {
-      color: #ca750c !important; 
-  }
-  
-  input[type=email]:focus:not([readonly]) {
-      border-bottom: 1px solid #ca750c !important;
-      box-shadow: 0 1px 0 0 #ca750c !important; 
-  }
-  .form-dark input[type=password]:focus:not([readonly]) + label {
-    color: #fff; }
-  
-  .form-dark input[type="checkbox"] + label:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 17px;
-    height: 17px;
-    z-index: 0;
-    border: 1.5px solid #fff;
-    border-radius: 1px;
-    margin-top: 2px;
-    -webkit-transition: 0.2s;
-    transition: 0.2s; }
-  
-  .form-dark input[type="checkbox"]:checked + label:before {
-    top: -4px;
-    left: -3px;
-    width: 12px;
-    height: 22px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent rgb(223, 110, 18) rgb(223, 110, 18) transparent;
-    -webkit-transform: rotate(40deg);
-    -ms-transform: rotate(40deg);
-    transform: rotate(40deg);
-    
-    -webkit-transform-origin: 100% 100%;
-    -ms-transform-origin: 100% 100%;
-    transform-origin: 100% 100%; }
-  
-  .form-dark .modal-header {
-      border-bottom: none;
-  }
-  
-  .btn-success:hover {
-    color: #fff !important;
-    loginContainer: {
-      minWidth: 320,
-      maxWidth: 400,
-      height: 'auto',
-      position: 'absolute',
-      top: '20%',
-      left: 0,
-      right: 0,
-      margin: 'auto'
-    }
-    paper: {
-      padding: 20,
-      overflow: 'auto'
-    }
-    buttonsDiv: {
-      textAlign: 'center',
-      padding: 10
-    }
-    flatButton: {
-      color: grey500
-    }
-    checkRemember: {
-      style: {
-        float: 'left',
-        maxWidth: 180,
-        paddingTop: 5
-      },
-      labelStyle: {
-        color: grey500
-      },
-      iconStyle: {
-        color: grey500,
-        borderColor: grey500,
-        fill: grey500
-      }
-    }
-    loginBtn: {
-      float: 'right'
-    }
-    btn: {
-      background: '#4f81e9',
-      color: white,
-      padding: 7,
-      borderRadius: 2,
-      margin: 2,
-      fontSize: 13
-    }
-    btnFacebook: {
-      background: '#4f81e9'
-    }
-    btnGoogle: {
-      background: '#e14441'
-    }
-    btnSpan: {
-      marginLeft: 5
-    }
-    .ttext {
-      color: #dc590a !important;
-  }
-    #outPopUp {
-      position: absolute;
-      width: 300px;
-      height: 200px;
-      z-index: 15;
-      top: 50%;
-      left: 50%;
-      width:800px; margin:0 auto;
-      
-    }
-    .form-control{
-      border: 0px solid !important;
-      border-bottom: 1px solid #ced4da !important;
-      background-color:transparent !important; 
-    }
-    /* label color */
-     .input-field label {
-       color: #000;
-     }
-     /* label focus color */
-     .input-field input[type=text]:focus + label {
-       color: #000;
-     }
-     /* label underline focus color */
-     .input-field input[type=text]:focus {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* valid color */
-     .input-field input[type=text].valid {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* invalid color */
-     .input-field input[type=text].invalid {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* icon prefix focus color */
-     .input-field .prefix.active {
-       color: #000;
-     }
-     .validate:disabled, .validate[readonly] {
-       background-color: #e9ecef;
-      opacity: 1;
-  }
-  `]
 })
 export class PurchaseOrderComponent implements OnInit {
   //searchTerm : FormControl = new FormControl();
@@ -258,9 +77,9 @@ export class PurchaseOrderComponent implements OnInit {
   items1:any[];
 
   //component constructor
-  constructor(private service: PurchaseService, private router: Router,//private _itemService:ItemsService,
-    private el: ElementRef,private calendar: NgbCalendar,private sanitizer: DomSanitizer){     
-      this.items1 = this.mapItems(router.config[2].children); 
+  constructor(private service: PurchaseService,//private _itemService:ItemsService,
+    private calendar: NgbCalendar){     
+      //this.items1 = this.mapItems(router.config[2].children); 
    this.SearchClear();
   }
 
@@ -316,7 +135,7 @@ DocumentDelete(value:any,i:number)
         {        
           this.lblshow=true;
           this.color="#8a0808";
-        this.Msg="Documents should not be Empty...";
+        this.Msg="Documents should not be Empty...!";
         //this.showp=true;
         }
         else{  
@@ -351,6 +170,7 @@ DocumentDelete(value:any,i:number)
   }
   showmodal=false;
   displayVar='none';
+  searchText='';
   indexnumber:number=0;
   //Toggle the Popup
   showm(v:number)
@@ -359,11 +179,13 @@ DocumentDelete(value:any,i:number)
       if(this.showmodal==false)
       {
         this.showmodal=true;
+        this.searchText="";
         this.displayVar='block';     
       }
       else if(this.showmodal==true)
       {
         this.showmodal=false;
+        this.searchText="";
         this.displayVar='none';
       // this.LoadPopupData();
       }
@@ -499,7 +321,7 @@ DocumentDelete(value:any,i:number)
     }
   }
 
-  //life cycle hoot
+  //life cycle hook
   ngOnInit() 
     {    
       this.LoadData(); 
@@ -512,8 +334,7 @@ DocumentDelete(value:any,i:number)
      this.IsView=parsedObject[0].IsView;
      this.IsDelete=parsedObject[0].IsDelete;
      this.searchdiv=true;
-     this.adddiv=false;
-       
+     this.adddiv=false;       
     }
 
     //empty po deails
@@ -542,7 +363,7 @@ DocumentDelete(value:any,i:number)
                 this.showp=false;
                 this.gridData=[];
                 this.color="#8a0808";
-                this.Msg="No Record(s) found...";
+                this.Msg="No Record(s) found...!";
                 this.lblshow=true;
                 this.showp=true;
               }
@@ -554,7 +375,7 @@ DocumentDelete(value:any,i:number)
               } else {
                 this.girdnumberOfPaginators = Math.floor(this.gridData.length / this.girditemsPerPage + 1);
               }
-              this.paginators=[];
+              this.girdpaginators=[];
               for (let i = 1; i <= this.girdnumberOfPaginators; i++) {
                 this.girdpaginators.push(i);
               } 
@@ -799,15 +620,33 @@ DocumentDelete(value:any,i:number)
  }
 
  //auto complete for selected item data
-  public filterChange(filter: any,coltype:string): void {
+  public filterChange(filter: any,j:any,coltype:string): void {
+    if(filter=="")
+    {
+      this.LineItems[j].ItemID=0;
+      this.LineItems[j].ItemCode="";
+      this.LineItems[j].ItemName="";
+      this.LineItems[j].ItemPrice=0;
+      this.LineItems[j].CategoryName="";
+      this.LineItems[j].CGST=0;
+      this.LineItems[j].SGST=0;
+      this.LineItems[j].IGST=0;
+      this.LineItems[j].Quantity=0;
+      this.LineItems[j].NetAmount=0;
+      this.LineItems[j].Discount=0;
+      this.LineItems[j].IsChecked=false;
+      this.LineItems[j].IsActive=true;
+      this.LineItems[j].IsDeleted=false;
+      this.GridItems = this.GridItems.filter(item => item.IndexNumber !== (j+1));
+     // this.GridItems.splice(this.GridItems.indexOf(this.GridItems), 1);
+      this.CalculateTotalAmount();
+    }
     if(coltype=='ItemCode')
     {
-      this.log('filterChange', filter);
       this.dataCode = this.ItemsDataCode.filter((s) => s.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
     }
     else if(coltype=='ItemName')
     {
-      this.log('filterChange', filter);
       this.dataName = this.ItemsDataName.filter((s) => s.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
       }
        }
@@ -849,7 +688,7 @@ DocumentDelete(value:any,i:number)
           } else {
             this.girdnumberOfPaginators = Math.floor(this.gridData.length / this.girditemsPerPage + 1);
           }
-          this.paginators=[];
+          this.girdpaginators=[];
           for (let i = 1; i <= this.girdnumberOfPaginators; i++) {
             this.girdpaginators.push(i);
           }         
@@ -899,6 +738,7 @@ DocumentDelete(value:any,i:number)
         this.podetails.TotalQunatity=0;
         this.podetails.TotalSGST=0;
         this.podetails.VendorID=0;
+        this.podetails.PurchaseOrderID=0;
         this.GetEmptyLineitems();
         this.LoadVendorList();
         this.EmptyDocuments();
@@ -945,8 +785,7 @@ DocumentDelete(value:any,i:number)
         if(orderid!=0)
         {
           this.LineItems=[];
-          this.LineItems.length=0;
-         
+          this.LineItems.length=0;         
             this.gridData.forEach((data) => {
               if(orderid==data.PurchaseOrderID){
                 this.podetails.PurchaseOrderID =data.PurchaseOrderID;
@@ -974,8 +813,7 @@ DocumentDelete(value:any,i:number)
     }
     //edit in grid data
     Edit(orderid:number)
-    { 
-     
+    {      
       this.isView=false;
         this.adddiv=true;
         this.searchdiv=false;
@@ -1060,7 +898,7 @@ DocumentDelete(value:any,i:number)
         {
           this.podetails.PurchaseOrderID=orderid;  
           this.podetails.OrderNo ="";
-          this.podetails.OrderDate1=this.calendar.getToday();;      
+          this.podetails.OrderDate1=this.calendar.getToday();      
           this.podetails.Status='Delete'; 
                     this.service.PostData(this.podetails,[]).subscribe(data => {  
                     if (data > 0) 
@@ -1092,11 +930,13 @@ DocumentDelete(value:any,i:number)
          this.Msg="LineItems should not be Empty...";
          //this.showp=true;
         }
-        else{  this.lblshow=false;
+        else{  
+          this.lblshow=false;
           this.color="";
           this.Msg="";          
           this.showp=false;
-          this.LineItems.splice(delindx, 1);}   
+          this.LineItems.splice(delindx, 1);
+        }   
           this.CalculateTotalAmount();   
           if(this.LineItems[delindx].ItemID !=0)
           {
@@ -1134,8 +974,7 @@ DocumentDelete(value:any,i:number)
             let POSdetails:PODetails[]=[];
             let poattachments:POAttachments[]=[];
             if(this.LineItems.length>0)
-            {
-                  
+            {                  
                     for(var i=0;i<this.LineItems.length;i++)
                     {
                       if(this.LineItems[i].ItemID !=0)
@@ -1160,8 +999,7 @@ DocumentDelete(value:any,i:number)
                     }
             }
             if(this.Documents.length>0)
-            {
-                  
+            {                  
                     for(var i=0;i<this.Documents.length;i++)
                     {
                       if(this.Documents[i].FileName !="")
@@ -1236,8 +1074,7 @@ DocumentDelete(value:any,i:number)
         let POSdetails:PODetails[]=[];
         let poattachments:POAttachments[]=[];
         if(this.LineItems.length>0)
-        {
-              
+        {              
                 for(var i=0;i<this.LineItems.length;i++)
                 {
                   if(this.LineItems[i].ItemID !=0)
@@ -1262,8 +1099,7 @@ DocumentDelete(value:any,i:number)
                 }
         }
         if(this.Documents.length>0)
-        {
-              
+        {              
                 for(var i=0;i<this.Documents.length;i++)
                 {
                   if(this.Documents[i].FileName !="")
@@ -1321,6 +1157,7 @@ DocumentDelete(value:any,i:number)
         
       }
     }
+    //#region Main Grid Pagination And Sorting
     girdsortBy(by: string | any): void {
 
         this.gridData.sort((a: any, b: any) => {
@@ -1397,8 +1234,10 @@ DocumentDelete(value:any,i:number)
           this.girdfirstVisiblePaginator = this.girdlastVisiblePaginator - (this.girdnumberOfPaginators % this.girdnumberOfVisiblePaginators);
         }
       }
+//#endregion
+     
 
-      //popup pagination methods
+//#region Items Data Grid Pagination
       sortBy(by: string | any): void {
 
         this.gridData.sort((a: any, b: any) => {
@@ -1475,4 +1314,5 @@ DocumentDelete(value:any,i:number)
           this.firstVisiblePaginator = this.lastVisiblePaginator - (this.numberOfPaginators % this.numberOfVisiblePaginators);
         }
       }
+     //#endregion
 }

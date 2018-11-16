@@ -67,5 +67,5 @@ export class POAttachments{
     PurchaseOrderID:number;
     FileName:string;
     FilePath:string;
-    File:FileList;
+    File:File;
 }

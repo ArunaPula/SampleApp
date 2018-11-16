@@ -203,7 +203,7 @@ export class LoginComponent implements OnInit{
     constructor(private appser:AppService,private _LoginService:LoginService,private toastaService:ToastaService, private toastaConfig: ToastaConfig,private router: Router){
       this.toastaConfig.theme = 'material';
       this.toastaService.default('Hi there');
-      if (localStorage.getItem('userToken') != null) {
+      if (sessionStorage.getItem('userToken') != null) {
              this.router.navigate([ 'home' ]);
         }
         else{
@@ -273,8 +273,8 @@ if(email.value !=undefined && password.value !=undefined)
   this._LoginService.userAuthentication(email.value,password.value).subscribe((data : any)=>{
     if(data.access_token !=null && data !=null)
     {
-      localStorage.setItem('userToken',data.access_token);
-      localStorage.setItem('username',email.value);
+      sessionStorage.setItem('userToken',data.access_token);
+      sessionStorage.setItem('username',email.value);
       this.router.navigate(['home']);
     }
     else{let toastOptions:ToastOptions = {

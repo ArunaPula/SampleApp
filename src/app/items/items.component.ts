@@ -260,8 +260,7 @@ export class ItemsComponent implements OnInit{
      this.IsAdd=parsedObject[0].IsAdd;
      this.IsEdit=parsedObject[0].IsEdit;
      this.IsView=parsedObject[0].IsView;
-     this.IsDelete=parsedObject[0].IsDelete;
-     
+     this.IsDelete=parsedObject[0].IsDelete;     
     }
     Print(){     
       // this._itemService.Generate().subscribe((s: string) => {
@@ -411,7 +410,8 @@ export class ItemsComponent implements OnInit{
         this.searchcode="";
         this.searchname="";
         this.searchcategory="";
-        this.items={ItemID:0,ItemCode:'',ItemName:'',CategoryID:0,CategoryName:'',ItemPrice:0,CGST:0,IGST:0,SGST:0,TotalGST:0,MinQuantity:0,MaxQuantity:0,Discount:0,Status:''};
+        this.items={ItemID:0,ItemCode:'',ItemName:'',CategoryID:0,CategoryName:'',ItemPrice:0,CGST:0,
+        IGST:0,SGST:0,TotalGST:0,MinQuantity:0,MaxQuantity:0,Discount:0,Status:''};
         this.ServiceStatus="";
         this.lblshow=false;        
     }
@@ -441,13 +441,10 @@ export class ItemsComponent implements OnInit{
                     this._itemService.getCategories().subscribe((s: CategoryList[]) => {                        
                         this.categories = s;                         
                      });
-                    this.items=data;
-                    
-                }
-               
+                    this.items=data;                    
+                }               
             });
-        }
-       
+        }       
     }
     Edit(itemid:number)
     { this.isView=false;
@@ -625,13 +622,11 @@ export class ItemsComponent implements OnInit{
             this.firstVisiblePaginator -= this.numberOfVisiblePaginators;
             this.lastVisiblePaginator -= (this.numberOfPaginators % this.numberOfVisiblePaginators);
           }
-        }
-    
+        }    
         this.activePage -= 1;
         this.firstVisibleIndex = this.activePage * this.itemsPerPage - this.itemsPerPage + 1;
         this.lastVisibleIndex = this.activePage * this.itemsPerPage;
       }
-    
       firstPage() {
         this.activePage = 1;
         this.firstVisibleIndex = this.activePage * this.itemsPerPage - this.itemsPerPage + 1;

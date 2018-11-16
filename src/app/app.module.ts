@@ -56,6 +56,9 @@ import { LockComponent } from './user/lock.component';
 import { UserServiceService } from './user/user-service.service';
 import { NotfoundComponent } from './notfound.component';
 import{AdminComponent} from './home/admin.component';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import {ɵROUTER_PROVIDERS} from '@angular/router';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
      //accordion and accordion tab
 //import {MenuItem} from 'primeng/api';
 //import {WebStorageModule, LocalStorageService} from "angular2-localstorage";
@@ -136,7 +139,8 @@ const  routes = [
                   ButtonModule,TableModule,DropDownsModule,
                   RadioButtonModule,DataTableModule,//MenuItem,
                   PDFModule,ExcelModule,MDBBootstrapModule.forRoot(),NavbarModule, WavesModule,
-                   LayoutModule
+                   LayoutModule,
+                   DateInputsModule
                   ],
                   
                   schemas: [
@@ -150,7 +154,7 @@ const  routes = [
                     provide : HTTP_INTERCEPTORS,
                     useClass : AuthInterceptor,
                     multi : true
-                  }]//,LocalStorageService
+                  },{provide: LocationStrategy, useClass: HashLocationStrategy}]//,LocalStorageService
 })
 
 export class AppModule {

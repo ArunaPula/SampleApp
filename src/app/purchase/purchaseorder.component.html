@@ -74,7 +74,7 @@
                       </div>
                       <div class="col-sm"></div>
                       <div class="col-sm">  
-          <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" aria-label="Search">
+          <input class="form-control" type="text" [(ngModel)]="MainsearchText" placeholder="Search" aria-label="Search">
                       </div>
                   </div>
                   <div class="row top" *ngIf="gridData.length != 0">
@@ -83,7 +83,7 @@
                                   <!--Table head-->
                                   <thead>
                                     <tr>
-                                        <th></th>
+                                     
                                       <th scope="row">SNO
                                               <a (click)="girdsortBy('PurchaseOrderID')" >
                                                       <mdb-icon icon="sort" class="ml-1"></mdb-icon>
@@ -113,15 +113,15 @@
                             
                                   <!--Table body-->
                                   <tbody>
-                                    <tr *ngFor="let data of gridData | basecustompipe: { OrderNo: searchText, OrderDate: searchText,VendorName: searchText, Status: searchText} : false; let i = index"
+                                    <tr *ngFor="let data of gridData | basecustompipe: { OrderNo: MainsearchText, OrderDate: MainsearchText,VendorName: MainsearchText, Status: MainsearchText} : false; let jj = index"
                                     >
-                                        <th><a  (click)="collapsed1=!collapsed1"><i class="fa fa-plus"></i></a></th>
-                                      <th px-3 *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex" scope="row">{{i+1}}</th>
-                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.OrderNo}}</td>
-                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.OrderDate}}</td>
-                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.VendorName}}</td>
-                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">{{data.Status}}</td>
-                                      <td *ngIf="data.PurchaseOrderID >= girdfirstVisibleIndex && data.PurchaseOrderID <= girdlastVisibleIndex">
+                                     
+                                      <th px-3 *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex" scope="row">{{jj+1}}</th>
+                                      <td *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex">{{data.OrderNo}}</td>
+                                      <td *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex">{{data.OrderDate}}</td>
+                                      <td *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex">{{data.VendorName}}</td>
+                                      <td *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex">{{data.Status}}</td>
+                                      <td *ngIf="(jj+1) >= girdfirstVisibleIndex && (jj+1) <= girdlastVisibleIndex">
                                           <div class="row">
                                                       <div class="col col-lg-1">
                                                                       <a (click)="View(data.PurchaseOrderID)" *ngIf="IsView">
@@ -142,122 +142,13 @@
                                       </td>
                                     </tr>
                                   </tbody>
-                                  <tbody *ngIf="!collapsed1"><tr>
-                                      <td colspan="50">
-                                          <table cellpadding="0" cellspacing="0" class="STLevents" border="0">
-                                              <tbody>
-                                               
-                                              <tr style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                                  <td style="width: 10px;">&nbsp;</td>
-                                                  <td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td><td style="width:75px;">&nbsp;</td>
-                                              </tr>
-                                              
-                                              
-                                              <tr class="bottom" style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                                  <td style="width: 10px">&nbsp;</td>
-                                                  
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span></span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Melbourne VI<br>Australia</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;vertical-align:top;padding-bottom:2px;position:static;"><span>Singapore<br>Singapore</span></td>
-                                  
-                                                      
-                                              </tr>
-                                              
-                                              <tr class="bottom" style="height: 35px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                                  <td style="width: 10px">&nbsp;</td>
-                                                  
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;">
-                                                            <span title=""><b>Booked</b></span>
-                                                            <div title="" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">
-                                                              &nbsp;6 Oct 17</div></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" 
-                                                          style="width:150px;padding-left:1px;border-left:solid 1px;position:static;">
-                                                          <span title="Bangkok, Thailand / 15 Oct 17 13:00 GMT">Estimated departure</span>
-                                                          <div title="Bangkok, Thailand / 15 Oct 17 13:00 GMT" 
-                                                          style="white-space:nowrap; font-size:9px; height:18px; width:90px;">
-                                                          &nbsp;15 Oct 17 20:00</div>
-                                                        </td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><span title="Melbourne VI, Australia / 16 Oct 17 00:00 GMT">Estimated arrival</span><div title="Melbourne VI, Australia / 16 Oct 17 00:00 GMT" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">&nbsp;16 Oct 17 10:00</div></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="bottom" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><span title="Singapore, Singapore / 18 Oct 17 02:00 GMT">Estimated delivery</span><div title="Singapore, Singapore / 18 Oct 17 02:00 GMT" style="white-space:nowrap; font-size:9px; height:18px; width:90px;">&nbsp;18 Oct 17 10:00</div></td>
-                                  
-                                                      
-                                              </tr>
-                                              
-                                              <tr style="height: 14px;width:100%;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                    <td style="padding: 0px !important;"><img src="https://stage.agility.com/TrackingGO2UAT/image/progress/progress_red.gif" style="width:100%;" height="14"></td>
-                                  </tr>
-                                  
-                                              
-                                              <tr class="top" style="height: 35px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                                  <td style="width: 10px;">&nbsp;</td>
-                                                  <td style="width: 75px">&nbsp;</td>
-                                                  
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Bangkok, Thailand / " style="height:18px; width:0px;">&nbsp;</div><span title="Bangkok, Thailand / ">Received</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Bangkok, Thailand / " style="height:18px; width:0px;">&nbsp;</div><span title="">Departed</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;padding-left:1px;border-left:solid 1px;position:static;"><div title="Melbourne VI, Australia / " style="height:18px; width:0px;">&nbsp;</div><span title="Melbourne VI, Australia / ">Arrived</span></td>
-                                  
-                                                      
-                                                          <td colspan="1" valign="top" align="left" style="padding-left:1px;border-left:solid 1px;position:static;width:75px;"><div title="Singapore, Singapore / " style="height:18px; width:0px;">&nbsp;</div><span title="Singapore, Singapore / ">Delivered</span></td>
-                                  
-                                                      
-                                              </tr>
-                                              
-                                              <tr class="top" style="height: 1px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                                  <td style="width: 10px;">&nbsp;</td>
-                                                  <td style="width: 75px">&nbsp;</td>
-                                                  
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Bangkok<br>Thailand</span></td>
-                                  
-                                                      
-                                                          <td colspan="2" valign="top" align="left" style="width:150px;vertical-align:top;padding-top:2px;position:static;"><span>Melbourne VI<br>Australia</span></td>
-                                  
-                                                      
-                                                          <td colspan="1" valign="top" align="left" style="vertical-align:top;padding-top:2px;position:static;width:75px;"><span>Singapore<br>Singapore</span></td>
-                                  
-                                                      
-                                              </tr>
-                                              
-                                      <tr class="top" style="height: 10px;border-bottom: 0px solid rgba(0,0,0,0.12) !important;">
-                                  </tr>
-                                  
-                                              
-                                          </tbody></table>
-                                      </td>
-                                  </tr>
-                              </tbody>
+                                 
+                                 
                                 </table>
                                 <div class="d-flex justify-content-center">
                 
                                       <!--Pagination -->
-                                      <nav class="my-4 pt-2">
+                                      <nav class="my-4 pt-2"  style="background-color: #949494;">
                                         <ul class="pagination pagination-circle pg-orange mb-0">
                                   
                                           <!--First-->
@@ -274,8 +165,9 @@
                                           </li>
                                   
                                           <!--Numbers-->
-                                          <li #girdpages *ngFor="let page of girdpaginators | slice:girdfirstVisiblePaginator:girdlastVisiblePaginator; let i = index" class="page-item" [ngClass]="{active: i + girdfirstVisiblePaginator + 1 == girdactivePage}">
-                                              <a class="page-link waves-light" (click)="girdchangePage($event)" mdbWavesEffect>{{girdpage}}</a>
+                                          <li #girdpages *ngFor="let page of girdpaginators | slice:girdfirstVisiblePaginator:girdlastVisiblePaginator; let i = index"
+                                           class="page-item" [ngClass]="{active: i + girdfirstVisiblePaginator + 1 == girdactivePage}" style="margin-top: 15px;">
+                                              <a class="page-link waves-light" (click)="girdchangePage($event)" mdbWavesEffect>{{page}}</a>
                                           </li>      
                                   
                                   
@@ -407,7 +299,7 @@
                                    [(ngModel)]="l.ItemCode"> -->
                                    <kendo-autocomplete [disabled]="isView" [filterable]="true" [ngModelOptions]="{standalone: true}"
                                    [data]="dataCode" (valueChange)="valueChange($event,i,'ItemCode')"
-                                   (filterChange)="filterChange($event,'ItemCode')" [(ngModel)]="l.ItemCode"
+                                   (filterChange)="filterChange($event,i,'ItemCode')" [(ngModel)]="l.ItemCode"
                                    [placeholder]="'Select Item Code'"
                                    >
                                </kendo-autocomplete>

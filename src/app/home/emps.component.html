@@ -58,7 +58,8 @@
         
      </div> 
      
-      <!-- <div class="contextmenu1" *ngIf="IfClicked1==true" [ngStyle]="{'left.px': contextmenuX1, 'top.px': contextmenuY1,'display':displayVar1}">
+      <!-- <div class="contextmenu1" *ngIf="IfClicked1==true"
+         [ngStyle]="{'left.px': contextmenuX1, 'top.px': contextmenuY1,'display':displayVar1}">
             <kendo-popup [popupClass]="'content popup'" [anchor]="anchor">
                     <div id="div2" style="width: 80% !important;left: 20px;"><h5></h5>
                         <span>Right click for more options.
@@ -68,12 +69,13 @@
                         </div>
             </kendo-popup>
           </div> -->
-          <div class="contextmenu" *ngIf="IfClicked==true" [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY,'display':displayVar}">
+          <div class="contextmenu" *ngIf="IfClicked==true" 
+          [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY,'display':displayVar}">
             <kendo-popup [popupClass]="'content popup'" [anchor]="anchor">
                 <kendo-splitter orientation="horizontal">
                 <kendo-splitter-pane min="40%">
-            <p>Tick columns to display<span class="close">
-                <a href="javascript:void(0);" (click)="displayVar ='none'" 
+            <p>Tick columns to display<span class="close"  (click)="displayVar ='none'">
+                <a href="javascript:void(0);" 
                 style="color: #ec7812 !important;">x</a></span></p>
             <kendo-tabstrip [ngStyle]="{'font-size.px':12}">
               <kendo-tabstrip-tab [title]="'Department'" [selected]="true" >

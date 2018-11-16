@@ -22,6 +22,7 @@ constructor(private _http:Http) { }
   public getEmpColumnsOrder():Observable<IEmployeesColOrder[]> {
     return this._http.get(this.BasicPath+'GetEmpColumnsOrder').map((res:Response) => <IEmployeesColOrder[]> res.json()).catch(this.handleError);;
   }
+ 
   public getEmpList():Observable<IEmployeeList[]> {
     return this._http.get(this.BasicPath+'GetEmpList').map((res:Response) => <IEmployeeList[]> res.json()).catch(this.handleError);;
   }

@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -55,11 +55,6 @@ import { Router } from '@angular/router';
       /* font-family: 'Coming Soon', cursive; */
       /* font-family: 'Jim Nightshade', cursive; */
       }
-      
-      
-      
-      
-      
       
       .con {
         width: 500px;

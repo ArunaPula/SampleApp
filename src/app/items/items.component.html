@@ -97,12 +97,12 @@
                         <tbody>
                           <tr *ngFor="let data of gridData | basecustompipe: { ItemCode: searchText, ItemName: searchText,CategoryName: searchText, ItemPrice: searchText} : false; let w = index">
                               
-                            <th px-3 *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex" scope="row">{{w+1}}</th>
-                            <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemCode}}</td>
-                            <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemName}}</td>
-                            <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.CategoryName}}</td>
-                            <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">{{data.ItemPrice}}</td>
-                            <td *ngIf="data.ItemID >= firstVisibleIndex && data.ItemID <= lastVisibleIndex">
+                            <th px-3 *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex" scope="row">{{w+1}}</th>
+                            <td *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex">{{data.ItemCode}}</td>
+                            <td *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex">{{data.ItemName}}</td>
+                            <td *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex">{{data.CategoryName}}</td>
+                            <td *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex">{{data.ItemPrice}}</td>
+                            <td *ngIf="(w+1) >= firstVisibleIndex && (w+1) <= lastVisibleIndex">
                                 <div class="row">
                                             <div class="col col-lg-1">
                                                             <a (click)="View(data.ItemID)" *ngIf="IsView">
@@ -128,7 +128,7 @@
                       <div class="d-flex justify-content-center">
       
                             <!--Pagination -->
-                            <nav class="my-4 pt-2">
+                            <nav class="my-4 pt-2"  style="background-color: #949494;">
                               <ul class="pagination pagination-circle pg-orange mb-0">
                         
                                 <!--First-->
@@ -145,7 +145,8 @@
                                 </li>
                         
                                 <!--Numbers-->
-                                <li #pages *ngFor="let page of paginators | slice:firstVisiblePaginator:lastVisiblePaginator; let i = index" class="page-item" [ngClass]="{active: i + firstVisiblePaginator + 1 == activePage}">
+                                <li #pages *ngFor="let page of paginators | slice:firstVisiblePaginator:lastVisiblePaginator; let i = index" class="page-item"
+                                 [ngClass]="{active: i + firstVisiblePaginator + 1 == activePage}"  style="margin-top: 15px;">
                                     <a class="page-link waves-light" (click)="changePage($event)" mdbWavesEffect>{{page}}</a>
                                 </li>      
                         

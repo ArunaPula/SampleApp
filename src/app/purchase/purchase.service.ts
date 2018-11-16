@@ -32,21 +32,21 @@ export class PurchaseService {
     public BasicPath="http://10.138.77.141:8011/api/PurchaseOrder/";
 constructor(private _http:Http) { }
 public getData():Observable<PurchaseOrderModel[]> {
-    return this._http.get(this.BasicPath+'GetList').map((res:Response) => <PurchaseOrderModel[]> res.json());
+    return this._http.get(this.BasicPath+'GetList').map((res:Response) => <PurchaseOrderModel[]> res.json()).catch(this.handleError);
   } 
   public getItemsData():Observable<Items1[]> {
-    return this._http.get(this.BasicPath+'GetItemsList').map((res:Response) => <Items1[]> res.json());
+    return this._http.get(this.BasicPath+'GetItemsList').map((res:Response) => <Items1[]> res.json()).catch(this.handleError);
   } 
   public getVendors():Observable<VendorList[]> {
-    return this._http.get(this.BasicPath+'GetVendorList').map((res:Response) => <VendorList[]> res.json());
+    return this._http.get(this.BasicPath+'GetVendorList').map((res:Response) => <VendorList[]> res.json()).catch(this.handleError);
   } 
   public SearchData(code:string,name:string):Observable<PurchaseOrderModel[]> {
-    return this._http.get(this.BasicPath+'GetData?'+'orderno='+code+'&vendor='+name).map((res:Response) => <PurchaseOrderModel[]> res.json());
+    return this._http.get(this.BasicPath+'GetData?'+'orderno='+code+'&vendor='+name).map((res:Response) => <PurchaseOrderModel[]> res.json()).catch(this.handleError);
   } 
   public Generate():Observable<string> {
     let headers = new Headers({ 'Content-Type': 'application/pdf' });
     let options = new RequestOptions({ headers: headers });
-    return this._http.get(this.BasicPath+'GeneratePDF', options).map((res:Response) => <string> res.json());
+    return this._http.get(this.BasicPath+'GeneratePDF', options).map((res:Response) => <string> res.json()).catch(this.handleError);
   } 
   public PostData(_category:PurchaseOrderModel,files1)
   {

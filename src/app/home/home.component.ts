@@ -44,7 +44,7 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
         margin-left: 0px;
       }
       .cardmenu{
-        margin-left: 151px;
+        margin-left: 207px;
       }
       .cardmenu-hide{
         margin-left: 0px;
@@ -53,15 +53,15 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 })
 
 export class HomeComponent {
-    public items: any[];
+ public items: any[];
  public LoginName:string;
-public BindHeader:string;
-menuState:string = 'out';
-HidemenuState:string = 'out';
-sideclass:string='sidenav-toggle1';
-hideMenu:string='block';
-userClaims: any;
-cardclass:string='cardmenu';
+  public BindHeader:string;
+  menuState:string = 'out';
+  HidemenuState:string = 'out';
+  sideclass:string='sidenav-toggle1';
+  hideMenu:string='block';
+  userClaims: any;
+  cardclass:string='cardmenu';
   constructor(private route: ActivatedRoute,private _LoginService:LoginService, private router: Router) {
     this.items = this.mapItems(router.config[2].children); 
     this._LoginService.getUserClaims().subscribe((data: any) => {
@@ -108,8 +108,8 @@ cardclass:string='cardmenu';
     }
 LockScreen()
 {
-    let uname= localStorage.getItem('username');
-    localStorage.clear();
+    let uname= sessionStorage.getItem('username');
+    sessionStorage.clear();
     localStorage.setItem('username',uname);
     this.router.navigate([ 'lock' ]);
 }
@@ -124,21 +124,30 @@ slideout:boolean=false;
         localStorage.setItem('screendata', JSON.stringify(this.screendata));
       }     
   }
-
 public Logout(){
-    localStorage.removeItem('userToken');
-    localStorage.clear();   
+   sessionStorage.removeItem('userToken');
+    localStorage.clear();  
+    sessionStorage.clear();   
     this.router.navigate(['login']);
 }
+private isUploadBtn: boolean = true;  
+//file upload event  
+fileChange(event) {  
+  debugger;  
+  let fileList: FileList = event.target.files;  
+  if (fileList.length > 0) {  
+  let file: File = fileList[0];  
+  this._LoginService.POSTFile(file);
+  }  
+  window.location.reload();  
+  }  
   // convert the routes to menu items.
-  private mapItems(routes: any[], path?: string): any[] {
-   
+  private mapItems(routes: any[], path?: string): any[] {   
       return routes.map(item => {
           const result: any = {
               text: item.text,
               path: (path ? `${ path }/` : '') + item.path
           };
-
           if (item.children) {
               result.items = this.mapItems(item.children, item.path);
           }         

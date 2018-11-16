@@ -190,6 +190,12 @@ body { font-family: "RobotoRegular",Helvetica,Arial,sans-serif;
     right: 0;
   }
   @media (min-width: 1200px)
+  {
+.container {
+    max-width: 1219px;
+}
+}
+  @media (min-width: 1200px)
   {.container1 {
       max-width: 540px;
   }
@@ -318,7 +324,7 @@ body { font-family: "RobotoRegular",Helvetica,Arial,sans-serif;
       background-color: transparent !important;
   }
   nav{
-    background-color: #ea7d3e !important;
+    background-color: #ea7d3e;
   }
   .alert-danger {
       color: red !important;
@@ -415,8 +421,7 @@ body { font-family: "RobotoRegular",Helvetica,Arial,sans-serif;
   button:focus {
       outline: none;
       background-color: #ea6e33;
-  }
- 
+  } 
   .collapsible-body {
     border-bottom: 0px solid #ddd;
       padding: 0rem;
@@ -543,5 +548,32 @@ body { font-family: "RobotoRegular",Helvetica,Arial,sans-serif;
     top: auto;
     width: 120px;
 }
+a:hover{
+    transform: scale(1.1);
+}
+.pagination .page-item .page-link:hover{
+    background-color: #fd7e14 !important;
+}
+.vl {
+    border-left: 1px solid #e25f12;
+}
+.schedule-heading {
+    margin-top: -18px;
+    margin-left: 10px;
+    background: #dadada;
+    width: 18%;
+    height: 32px;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    color: #100101;
+    text-align: center;
+    padding-top: 4px;
+    font-size: 1.20rem;
+}
 
+[type="checkbox"]:checked+span:not(.lever):before {
+  
+    border-right: 2px solid #d8570b;
+    border-bottom: 2px solid #d8570b;
+}
  

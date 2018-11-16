@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http } from '@angular/http';
+import { Http,RequestOptions, Headers } from '@angular/http';
 import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -32,7 +32,30 @@ export class LoginService {
 
   getUserClaims(){
    return this.http.get(this.rootUrl+'/api/GetUserClaims').catch(this.handleError);
+  }
+  public POSTFile(file:File)
+  {
+    return new Promise((resolve, reject) => {
+      var formData: any = new FormData();
+      var xhr = new XMLHttpRequest();
+      formData.append("iD", "Hello");
+      formData.append("iD1", "Hello1");
+      var data = file;
+      //blob = new Blob([data], { type: 'application/json' }),
+      formData.append("file", new Blob([data], { type: 'application/json' }),file.name);
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+              if (xhr.status == 201) {
+                  resolve(JSON.parse(xhr.response));
 
+              } else {
+                  reject(JSON.parse(xhr.response));
+              }
+          }
+      }
+      xhr.open("POST", "http://10.138.77.141:8011/api/Values/UploadJsonFile", true);
+      xhr.send(formData);
+  });
   }
   getRoles():Observable<Roles[]>{
     return this._http.get(this.rootUrl+'/api/User/GetRoles').map((res:Response) => <Roles[]> res.json());
